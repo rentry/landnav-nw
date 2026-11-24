@@ -47,11 +47,7 @@
       <a class="site-logo" href="{{ '/' | relative_url }}"><strong>{{ name_first }}</strong>{% if name_rest != '' %} {{ name_rest }}{% endif %}</a>
       <p class="site-footer__legal">© {{ site.time | date: '%Y' }} {{ site.data.strings.all_rights_reserved | default: 'All rights reserved' }}</p>
       {%- if site.izar.social.size > 0 %}
-      <ul class="site-footer__social" role="list">
-        {%- for p in site.izar.social %}
-        <li><a href="{{ p.url }}" rel="me noopener" aria-label="{{ p.label }}">{% include icon.html name=p.icon %}</a></li>
-        {%- endfor %}
-      </ul>
+      <p class="site-footer__credit">{{ site.data.strings.made_by_humans | default: 'Proudly made by humans (not AI)' }}</p>
       {%- endif %}
     </div>
   </div>
