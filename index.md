@@ -7,19 +7,19 @@ description: Daniel Stephan, freelance front-end developer and designer. I desig
 sections:
   - type: hero
     variant: portrait
-    badge: Front-End Developer
+    badge: Land Navigation Instructor
     heading: |
-      Talk is cheap.
-      Show me the code
-    text: I design and code beautifully simple things, and I love what I do.
+      Find your way home
+      with LandNav NW.
+    text: I help individuals and groups discover the freedom and independence of self-reliant wilderness navigation.
     action:
-      label: Let's chat!
+      label: Let's explore!
       url: /contact/
     stats:
-      - value: "12"
-        label: Years experience
-      - value: "165"
-        label: Projects completed in 24 countries
+      - value: "18"
+        label: Years map & compass instructor
+      - value: "4"
+        label: Years search & rescue volunteer
     image:
       src: /assets/img/hero/developer
       widths: [380, 560, 754]
