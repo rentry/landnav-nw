@@ -49,17 +49,28 @@
   .btn--outline { background: transparent; border-color: var(--line-strong); color: var(--ink); }
   .btn--outline:hover { border-color: var(--brand-ink); color: var(--brand-ink); }
 
-  /* Nav link. The current page sits in mint brackets: ‹ Services ›. The brackets hang outside the word,
-     so they take no space: links line up in a column and nothing moves when they appear. */
+  /* Nav link. The current or hovered page gets a corner bracket at its top left, echoing the logo.
+     The bracket hangs outside the word, so it takes no space and nothing moves when it appears. */
   .nav-link {
+    --bracket-arm: 0.45em;
+    --bracket-weight: max(2px, 0.09em);
+    --bracket-x: 0.15em;
+    --bracket-y: 0.31em;
     position: relative; display: inline-flex; align-items: center; min-height: var(--tap);
     color: var(--ink); font-size: var(--step--1); text-decoration: none;
   }
   .nav-link:hover { color: var(--brand-ink); }
-  .nav-link::before, .nav-link::after { position: absolute; color: var(--brand-ink); opacity: 0; transition: opacity var(--dur-fast); }
-  .nav-link::before { content: '‹'; right: calc(100% + 0.35em); }
-  .nav-link::after { content: '›'; left: calc(100% + 0.35em); }
-  .nav-link[aria-current]::before, .nav-link[aria-current]::after, .nav-link:hover::before, .nav-link:hover::after { opacity: 1; }
+  .nav-link::before {
+    content: ''; position: absolute; pointer-events: none;
+    top: calc(50% - 0.5em - var(--bracket-y));
+    left: calc(-1 * (var(--bracket-x) + var(--bracket-weight)));
+    width: var(--bracket-arm); height: var(--bracket-arm);
+    border-top: var(--bracket-weight) solid var(--brand-ink);
+    border-left: var(--bracket-weight) solid var(--brand-ink);
+    opacity: 0; transform: translate(0.15em, 0.15em);
+    transition: opacity var(--dur-fast) var(--ease-out), transform var(--dur-fast) var(--ease-out);
+  }
+  .nav-link[aria-current]::before, .nav-link:hover::before, .nav-link:focus-visible::before { opacity: 1; transform: none; }
   .nav-link[aria-current] { color: var(--brand-ink); }
 
   /* Tag: tech or role on a project card ("Javascript", "PHP"). */

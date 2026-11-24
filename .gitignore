@@ -19,3 +19,5 @@ research/
 _site-*/
 .claude/
 releases/
+.DS_Store
+_includes/.DS_Store
