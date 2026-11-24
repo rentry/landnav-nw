@@ -5,7 +5,7 @@
 
 # The site's name (browser tab and search results) and a one-line description.
 title: LANDNAV NW
-description: Freelance front-end developer and designer. I design and code beautifully simple things.
+description: A land navigation training school dedicated to empowering individuals and groups to discover the freedom and independence of self-reliant wilderness wayfinding.
 lang: en
 # Your site's address, with no slash at the end. baseurl: only if the site lives in a sub-folder,
 # e.g. "/portfolio" for username.github.io/portfolio. Otherwise leave it "".
@@ -15,11 +15,11 @@ baseurl: ""
 izar:
   # ── About you ──────────────────────────────────────────────────────────────
   # Your name in the header and footer. The first word is set bold.
-  name: Daniel Stephan
+  name: LANDNAV NW
   # What you do, in a few words. Search engines read it (structured data on the home page).
-  role: Front-end developer and designer
-  email: hello@daniel.example
-  address: 116 Fairground Rd, FL 32901, USA
+  role: Land navigation training school and wilderness guide
+  email: brentryanjohnson@gmail.com
+  address: Beavercreek, Oregon USA
   # Person (one person) or ProfessionalService (a studio). Tells search engines who the site is about.
   schema_type: Person
 
@@ -58,7 +58,7 @@ izar:
   # ── Footer ─────────────────────────────────────────────────────────────────
   # The closing call to action at the top of the footer, on every page.
   footer:
-    heading: Let's make something amazing together.
+    heading: Find your way home.
     action:
       before: Start by
       label: saying hi
