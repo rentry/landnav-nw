@@ -1,0 +1,6 @@
+{%- comment -%}
+  Inline SVG icon from _includes/icons/<name>.svg. Line icons take the text colour; parts with class "f" are filled.
+  {% include icon.html name="code" class="icon--brand" label="Front-end" %}
+  Without a label the icon is decorative and hidden from screen readers.
+{%- endcomment -%}
+<svg class="icon {{ include.class }}" viewBox="0 0 24 24" {% if include.label %}role="img" aria-label="{{ include.label }}"{% else %}aria-hidden="true"{% endif %} focusable="false">{% include icons/{{ include.name }}.svg %}</svg>

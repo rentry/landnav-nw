@@ -1,0 +1,71 @@
+/* Izar semantic colours. Sections and components use only these names, never the scales.
+   Every value is light-dark(light, dark). Izar is dark by default: _config.yml `izar.color_scheme`
+   sets dark, light or auto (follow the visitor's system setting) on <html data-theme>. */
+@layer tokens {
+  :root {
+    color-scheme: light dark;
+
+    /* Surfaces. The page alternates between page and band, section by section, like the design. */
+    --page: light-dark(#f4f5f7, #222428);
+    --band: light-dark(#e9ebef, #292b30);
+    --bg: var(--page);
+    --surface: light-dark(#ffffff, #2f3237); /* cards */
+    --surface-2: light-dark(var(--graphite-100), #35383e); /* a card inside a card, tags, chips */
+
+    /* Text and lines */
+    --ink: light-dark(#1c1e22, #eceef1);
+    --ink-muted: light-dark(var(--graphite-800), var(--graphite-300));
+    --ink-subtle: light-dark(var(--graphite-700), var(--graphite-400));
+    --line: light-dark(var(--graphite-200), #3a3d43);
+    --line-strong: light-dark(var(--graphite-400), var(--graphite-600));
+    --field: light-dark(#ffffff, #2f3237);
+    --field-border: var(--graphite-500); /* 3:1 against fields in both modes (WCAG 1.4.11) */
+
+    /* Brand: mint. The badge, links, the main button, the active nav item, icons. */
+    --brand: light-dark(var(--mint-400), var(--mint-300)); /* fills: always dark text on them */
+    --brand-hover: light-dark(var(--mint-300), var(--mint-200));
+    --on-brand: light-dark(#1c1e22, #222428);
+    --brand-ink: light-dark(var(--mint-700), var(--mint-300)); /* mint text and links: 4.5:1 on every surface */
+    --brand-ink-hover: light-dark(var(--mint-800), var(--mint-200));
+    --brand-soft: light-dark(var(--mint-50), #23362f);
+
+    /* Highlight: amber stars and marks. Always dark text on it. */
+    --highlight: var(--amber-400);
+    --on-highlight: #1c1e22;
+
+    /* Status */
+    --success: var(--brand-ink);
+    --success-soft: var(--brand-soft);
+    --danger: light-dark(var(--red-600), var(--red-400));
+    --danger-soft: light-dark(var(--red-50), #3a2022);
+
+    --focus: var(--brand-ink);
+    --shadow-near: light-dark(rgb(28 30 34 / 0.06), rgb(0 0 0 / 0.25));
+    --shadow-far: light-dark(rgb(28 30 34 / 0.12), rgb(0 0 0 / 0.5));
+  }
+
+  :root[data-theme='light'] { color-scheme: light; }
+  :root[data-theme='dark'] { color-scheme: dark; }
+
+  /* Section tones. Set `tone:` on a section; everything inside re-colours itself.
+     default and band alternate down the page. mint is a loud call to action, always dark text. */
+  .tone-default { --bg: var(--page); }
+  .tone-band { --bg: var(--band); }
+  .tone-mint {
+    --bg: var(--mint-400);
+    --surface: var(--mint-300);
+    --surface-2: var(--mint-300);
+    --ink: #222428;
+    --ink-muted: var(--mint-950);
+    --ink-subtle: var(--mint-950);
+    --line: var(--mint-600);
+    --line-strong: #222428;
+    --brand: #222428;
+    --brand-hover: #000000;
+    --on-brand: var(--mint-300);
+    --brand-ink: #222428;
+    --brand-ink-hover: #000000;
+    --focus: #222428;
+  }
+  [class*='tone-'] { background-color: var(--bg); color: var(--ink); }
+}

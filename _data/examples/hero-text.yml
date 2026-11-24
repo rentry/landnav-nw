@@ -1,0 +1,15 @@
+- type: hero
+  variant: text
+  badge: Front-End Developer
+  heading: |
+    Talk is cheap.
+    Show me the code
+  text: I design and code beautifully simple things, and I love what I do.
+  action:
+    label: Let's chat!
+    url: /contact/
+  stats:
+    - value: "12"
+      label: Years experience
+    - value: "165"
+      label: Projects completed in 24 countries

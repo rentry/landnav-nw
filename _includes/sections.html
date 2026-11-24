@@ -1,0 +1,8 @@
+{%- comment -%}
+  Renders a list of sections in order. Each item needs a `type` (hero, services, works, testimonials...).
+  `hidden: true` switches one off without deleting it. `prefix` keeps ids unique when the /blocks/ catalogue shows many on one page.
+{%- endcomment -%}
+{%- for s in include.sections -%}
+  {%- if s.hidden -%}{%- continue -%}{%- endif -%}
+  {%- include sections/{{ s.type }}.html section=s prefix=include.prefix -%}
+{%- endfor -%}

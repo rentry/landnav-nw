@@ -1,0 +1,21 @@
+/* Logos: centred rows, dim until hovered. */
+@layer sections {
+  .sec-logos { padding-block: var(--space-xl); }
+  .sec-logos .wrap > h2 { font-size: var(--step-2); text-align: center; margin-bottom: var(--space-l); }
+  .sec-logos .wrap > h2.visually-hidden { margin: 0; }
+  .logos__list { --gap: var(--space-xl); display: flex; flex-wrap: wrap; justify-content: center; gap: var(--space-l) var(--gap); list-style: none; padding: 0; max-width: 56rem; margin-inline: auto; }
+  .logos__item { display: grid; place-items: center; min-height: var(--tap); flex: 0 0 calc((100% - var(--gap)) / 2); }
+  .logos__item img { max-width: 100%; height: auto; opacity: 0.6; transition: opacity var(--dur-fast); }
+  .logos__item:hover img, .logos__link:focus-visible img { opacity: 1; }
+  .logos__link { display: grid; place-items: center; min-height: var(--tap); min-width: var(--tap); }
+  /* The files are white on transparent, so light mode flips them to dark. */
+  :root[data-theme='light'] .logos__item img { filter: invert(1); }
+  @media (prefers-color-scheme: light) { :root:not([data-theme]) .logos__item img { filter: invert(1); } }
+
+  @media (min-width: 36em) {
+    .logos__item { flex-basis: calc((100% - 2 * var(--gap)) / 3); }
+  }
+  @media (min-width: 60em) {
+    .logos__item { flex-basis: calc((100% - 4 * var(--gap)) / 5); }
+  }
+}

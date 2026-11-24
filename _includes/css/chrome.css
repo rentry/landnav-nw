@@ -1,0 +1,71 @@
+/* On every page: section spacing and heads, the header. The footer has its own file (footer.css). */
+@layer sections {
+  .sec { padding-block: var(--section-space); }
+  .sec-head { display: grid; gap: var(--space-2xs); margin-bottom: var(--space-xl); }
+  .sec-head__intro { max-width: 40em; margin-top: var(--space-xs); }
+
+  /* Text written below a page's front matter: left-aligned under the page header, at a reading width. */
+  .page-body { padding-bottom: var(--section-space); }
+  .page-body .prose { max-width: 40em; }
+
+  /* Header: sits on the page, sticks to the top. */
+  .site-header {
+    position: sticky; top: 0; z-index: var(--z-header);
+    background: color-mix(in srgb, var(--page) 92%, transparent);
+    backdrop-filter: blur(8px);
+  }
+  .site-header__inner { display: flex; align-items: center; gap: var(--space-m); min-height: var(--header-height); }
+  .site-logo { font-family: var(--font-sans); font-size: var(--step-0); color: var(--ink); text-decoration: none; letter-spacing: -0.01em; white-space: nowrap; }
+  .site-logo strong { font-weight: 700; }
+  .site-logo:hover { color: var(--ink); }
+  .site-nav ul, .site-menu__panel ul, .site-header__social { list-style: none; padding: 0; }
+  .site-nav { display: none; }
+  .site-nav ul { display: flex; gap: var(--space-l); }
+  .site-header__social { display: none; gap: var(--space-m); margin-left: auto; }
+  .site-header__social a { display: inline-flex; align-items: center; gap: 0.45em; min-height: var(--tap); color: var(--ink-subtle); font-size: var(--step--2); text-decoration: none; }
+  .site-header__social a:hover { color: var(--brand-ink); }
+  .site-header__social .icon { width: 0.95rem; height: 0.95rem; }
+
+  /* Phone menu: the square mint button from the design, opening a drop-down. */
+  .site-menu { position: relative; margin-left: auto; }
+  .site-menu__button {
+    display: grid; place-items: center; width: var(--tap); height: var(--tap);
+    background: var(--surface); border-radius: var(--radius-round); box-shadow: var(--shadow-s);
+    color: var(--brand-ink); list-style: none; cursor: pointer;
+  }
+  .site-menu__button::-webkit-details-marker { display: none; }
+  .site-menu__close, .site-menu[open] .site-menu__open { display: none; }
+  .site-menu[open] .site-menu__close { display: block; }
+  .site-menu__panel {
+    position: absolute; right: 0; top: calc(100% + 0.5rem); min-width: 14rem;
+    padding: var(--space-2xs) var(--space-s); background: var(--surface); border-radius: var(--radius-s); box-shadow: var(--shadow-l);
+  }
+  .site-menu__panel .nav-link { display: flex; font-size: var(--step-0); }
+  .site-menu__panel li + li { border-top: var(--hairline); }
+
+  /* Light/dark switch: a round button like the menu button. It shows the moon in light mode and the sun in dark. */
+  .theme-switch {
+    display: grid; place-items: center; flex: none; width: var(--tap); height: var(--tap); margin-left: auto;
+    background: none; border: 1px solid var(--line); border-radius: var(--radius-round); color: var(--ink-subtle);
+  }
+  .theme-switch:hover { color: var(--brand-ink); border-color: var(--brand-ink); }
+  .theme-switch .icon { width: 1.1rem; height: 1.1rem; }
+  .theme-switch__sun, :root[data-theme='dark'] .theme-switch__moon { display: none; }
+  :root[data-theme='dark'] .theme-switch__sun { display: block; }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme]) .theme-switch__moon { display: none; }
+    :root:not([data-theme]) .theme-switch__sun { display: block; }
+  }
+  .theme-switch + .site-menu { margin-left: var(--space-2xs); }
+
+  @media (min-width: 52em) {
+    .theme-switch { margin-left: var(--space-m); }
+    .site-nav { display: block; margin-left: auto; }
+    .site-header__social { display: flex; margin-left: var(--space-l); }
+    .site-menu { display: none; }
+  }
+  @media (min-width: 52em) and (max-width: 64em) {
+    .site-nav ul { gap: var(--space-s); }
+    .site-header__social span { display: none; } /* icons only when space is tight */
+  }
+}

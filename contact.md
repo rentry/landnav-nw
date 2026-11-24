@@ -1,0 +1,28 @@
+---
+layout: page
+title: Contact
+permalink: /contact/
+description: Get in touch with Daniel Stephan, freelance front-end developer and designer, about a new website, a redesign or front-end help.
+sections:
+  - type: page-header
+    badge: Contact
+    heading: Say hi
+    text: Have a project in mind? Send a message and I'll get back to you.
+  - type: contact
+    variant: form
+    eyebrow: Contact
+    heading: Let's build something
+    intro: Tell me a little about your idea. I read every message myself.
+    availability: Booking projects from January
+    budgets:
+      - Under $3,000
+      - $3,000 to $10,000
+      - $10,000 to $25,000
+      - Over $25,000
+    topics:
+      - A new website
+      - A redesign
+      - Front-end help
+      - Something else
+    note: I reply within two working days.
+---

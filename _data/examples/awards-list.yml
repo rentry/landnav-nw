@@ -1,0 +1,25 @@
+- type: awards
+  variant: list
+  heading: Awards
+  note: How to make my projects become valuable
+  years:
+    - year: "2017"
+      items:
+        - org: Awwwards
+          award: Site of the Year
+          project: Lewis
+        - org: CSS Design Awards
+          award: Honorable Mention
+          project: Bauhaus
+          url: https://bauhaus.example
+        - org: Product Hunt Maker
+          award: Gold in Digital Craft
+          project: Biforde
+    - year: "2016"
+      items:
+        - org: FWA
+          award: Corporate Social Responsibility
+          project: Arquito
+        - org: Semplice
+          award: Best Showcase
+          project: Focus

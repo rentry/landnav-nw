@@ -1,0 +1,15 @@
+// Cloudflare Workers deploy settings. Izar is a static site: `bundle exec jekyll build` writes _site/,
+// and `npx wrangler deploy` uploads it as static assets (no server code).
+// In the Cloudflare dashboard set the build command to: bundle exec jekyll build
+// On GitHub Pages or Netlify you don't need this file.
+{
+  "name": "izar-jekyll",
+  "compatibility_date": "2026-11-12",
+  "assets": {
+    "directory": "./_site",
+    // Unknown addresses get _site/404.html with a 404 status.
+    "not_found_handling": "404-page",
+    // /works and /works/ both work; links use the trailing slash.
+    "html_handling": "auto-trailing-slash"
+  }
+}

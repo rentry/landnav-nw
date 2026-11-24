@@ -1,0 +1,63 @@
+# The /blocks/ catalogue: each section variant, with a one-line note. The id is the file in _data/examples/ and the anchor.
+- group: Openers
+  items:
+    - id: hero-portrait
+      name: Hero with portrait
+      note: Badge, a two-line heading, one action and your stats, beside a cut-out portrait with floating tech chips.
+    - id: hero-text
+      name: Hero, words only
+      note: The same without a picture, for when you have no cut-out photo.
+- group: Inner pages
+  items:
+    - id: page-header-simple
+      name: Page header
+      note: The top of an inner page, with its one big heading. Leave out `heading` to use the page title.
+- group: What you do
+  items:
+    - id: services-intro
+      name: Services with intro
+      note: Stacked service cards beside a short hello. The design's second screen.
+    - id: services-grid
+      name: Services, grid
+      note: Service cards in a row, with a heading above.
+    - id: logos-grid
+      name: Client logos
+      note: Logos in a quiet grid. They dim until hovered and follow light and dark mode.
+- group: Work
+  items:
+    - id: works-staggered
+      name: Works, staggered
+      note: Project cards in two offset columns, the heading and a link to all projects tucked in the gaps.
+    - id: works-all
+      name: Works, every project
+      note: "`show: all` lists every project by `order`, three across. For the Works page."
+    - id: works-grid
+      name: Works, grid
+      note: A plain grid of project cards, for longer lists.
+- group: Proof
+  items:
+    - id: testimonials-tabs
+      name: Testimonials, tabs
+      note: One quote at a time; the people below are the tabs. Without JavaScript every quote shows.
+    - id: testimonials-grid
+      name: Testimonials, grid
+      note: Every quote at once, in cards.
+    - id: awards-list
+      name: Awards
+      note: Awards grouped by year, each with who gave it and for which project.
+- group: Notes
+  items:
+    - id: notes-list
+      name: Notes, list
+      note: Every post as a row with date, reading time and tags. For the Notes page. Filter by `tag` or cap with `limit`.
+    - id: notes-tags
+      name: Notes by topic
+      note: Every topic with its posts, for a Topics page. Post tags link here.
+    - id: notes-cards
+      name: Notes, cards
+      note: The latest few posts as cards, for the home page or the end of a project.
+- group: Getting in touch
+  items:
+    - id: contact-form
+      name: Contact
+      note: A form that needs no JavaScript (Web3Forms, Formspree, or demo), with your email, address and profiles beside it.

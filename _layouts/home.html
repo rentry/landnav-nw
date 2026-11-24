@@ -1,0 +1,13 @@
+---
+layout: default
+---
+{%- comment -%} A page built from sections: header, the sections in the page's front matter, anything written below the front matter, then the footer. {%- endcomment -%}
+{% include header.html %}
+<main id="main">
+{% include sections.html sections=page.sections %}
+{%- assign body = content | strip -%}
+{%- if body != '' %}
+<div class="wrap page-body"><div class="prose">{{ content }}</div></div>
+{%- endif %}
+</main>
+{% include footer.html %}

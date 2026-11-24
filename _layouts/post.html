@@ -1,0 +1,51 @@
+---
+layout: default
+---
+{%- comment -%}
+  A Notes post. Front matter: title, description (shown as the lead line and used by search engines), tags, date (from the file name),
+  and optionally image: { src, widths, width, height, alt, path } for a cover picture (see image.html; `path` is the full-size file used for social sharing).
+  Previous and next are the neighbouring posts by date. The JSON-LD article data comes from jekyll-seo-tag (in <head>), so it isn't repeated here.
+{%- endcomment -%}
+{%- comment -%} The author's initials for the round badge: first letter of the first and last word of izar.name. {%- endcomment -%}
+{%- assign name_words = site.izar.name | split: ' ' -%}
+{%- capture initials %}{{ name_words.first | slice: 0 | upcase }}{% if name_words.size > 1 %}{{ name_words.last | slice: 0 | upcase }}{% endif %}{% endcapture -%}
+{% include header.html %}
+<main id="main">
+  <article class="sec post">
+    <div class="wrap-narrow post__top">
+      {%- include url.html url='/notes/' %}
+      <a class="post__back" href="{{ href }}"><span aria-hidden="true">←</span> {{ site.data.strings.all_notes | default: 'All notes' }}</a>
+      {% include post-meta.html post=page %}
+      <h1 class="post__title">{{ page.title }}</h1>
+      {%- if page.description %}<p class="post__lead">{{ page.description }}</p>{% endif %}
+      {%- if page.tags.size > 0 %}{% include tag-links.html tags=page.tags class="post__tags" %}{% endif %}
+    </div>
+    {%- if page.image.src %}
+    <div class="wrap post__cover">{% include image.html image=page.image eager=true sizes="(min-width: 64em) 1100px, 92vw" class="post__img" %}</div>
+    {%- endif %}
+    <div class="wrap-narrow post__body prose">{{ content }}</div>
+
+    <div class="wrap-narrow post__end">
+      {%- if page.previous or page.next %}
+      <nav class="post__nav" aria-label="{{ site.data.strings.more_notes | default: 'More notes' }}">
+        {%- if page.previous %}{% include url.html url=page.previous.url %}
+        <a class="card card--link post__step" href="{{ href }}"><span class="post__step-label"><span aria-hidden="true">←</span> {{ site.data.strings.previous | default: 'Previous' }}</span><span class="post__step-title">{{ page.previous.title }}</span></a>
+        {%- endif %}
+        {%- if page.next %}{% include url.html url=page.next.url %}
+        <a class="card card--link post__step post__step--next" href="{{ href }}"><span class="post__step-label">{{ site.data.strings.next | default: 'Next' }} <span aria-hidden="true">→</span></span><span class="post__step-title">{{ page.next.title }}</span></a>
+        {%- endif %}
+      </nav>
+      {%- endif %}
+      <aside class="post__author" aria-label="{{ site.data.strings.about_author | default: 'About the author' }}">
+        <span class="chip" style="--chip-size: 3.25rem" aria-hidden="true"><span class="post__initials">{{ initials }}</span></span>
+        <div>
+          <p class="post__author-name">{{ site.data.strings.written_by | default: 'Written by' }} {{ site.izar.name }}</p>
+          <p class="post__author-text">{{ site.data.strings.author_bio | default: 'A freelance front-end developer and designer who builds fast, simple websites by hand.' }}</p>
+          {%- include url.html url='/contact/' %}
+          <a class="cmd" href="{{ href }}">{{ site.data.strings.say_hello | default: 'Say hello' }}</a>
+        </div>
+      </aside>
+    </div>
+  </article>
+</main>
+{% include footer.html %}

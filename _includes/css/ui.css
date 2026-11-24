@@ -1,0 +1,131 @@
+/* Izar UI primitives: layout helpers, labels, section heads, badge, buttons, links, tags, cards,
+   icon chips, stats, stars, fields and quotes. Sections are built from these; they never invent
+   colours or sizes of their own. */
+@layer ui {
+  .wrap { width: min(100% - 2 * var(--gutter), var(--wrap)); margin-inline: auto; }
+  .wrap-narrow { width: min(100% - 2 * var(--gutter), var(--wrap-narrow)); margin-inline: auto; }
+  .section { padding-block: var(--section-space); }
+  .stack > * + * { margin-top: var(--space-s); }
+  .lede { font-size: var(--step-0); color: var(--ink-muted); max-width: 40em; }
+  .muted { color: var(--ink-muted); }
+  .subtle { color: var(--ink-subtle); }
+  .small { font-size: var(--step--1); }
+
+  /* Eyebrow: the small word above a heading ("Introduce"). */
+  .eyebrow { font-size: var(--step--2); color: var(--ink-subtle); letter-spacing: 0.04em; }
+
+  /* Section head: a heading with a small muted note beside it ("Testimonials   What clients say"). */
+  .section-head { display: flex; flex-wrap: wrap; align-items: baseline; column-gap: var(--space-l); row-gap: var(--space-3xs); }
+  .section-head h2 { font-size: var(--step-3); }
+  .section-head p { font-size: var(--step--2); color: var(--ink-subtle); }
+
+  /* Badge: the mint label in the hero ("Front-End Developer"). */
+  .badge {
+    display: inline-block; padding: 0.25em 0.7em;
+    background: var(--brand); color: var(--on-brand); border-radius: var(--radius-xs);
+    font-size: var(--step--2); font-weight: var(--weight-strong); letter-spacing: 0.02em; line-height: 1.5;
+  }
+
+  /* Command link: the uppercase underlined call to action ("LET'S CHAT!"). The theme's main action. */
+  .cmd {
+    display: inline-flex; align-items: center; gap: 0.5em; min-height: var(--tap);
+    color: var(--brand-ink); font-size: var(--step--1); font-weight: var(--weight-strong);
+    letter-spacing: var(--tracking-label); text-transform: uppercase;
+    text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 0.45em;
+  }
+  .cmd:hover { color: var(--brand-ink-hover); text-underline-offset: 0.3em; }
+  .cmd--plain { color: var(--ink); text-decoration-color: var(--brand); }
+
+  /* Buttons, for forms and the few places a filled action is clearer than a link. */
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 0.6em;
+    min-height: var(--tap); padding: 0.6em 1.4em;
+    border: 1px solid transparent; border-radius: var(--radius-s);
+    font-size: var(--step--1); font-weight: var(--weight-strong); letter-spacing: 0.04em; line-height: 1.2; text-decoration: none;
+    transition: background-color var(--dur-fast), color var(--dur-fast), border-color var(--dur-fast);
+  }
+  .btn--primary { background: var(--brand); color: var(--on-brand); }
+  .btn--primary:hover { background: var(--brand-hover); color: var(--on-brand); }
+  .btn--outline { background: transparent; border-color: var(--line-strong); color: var(--ink); }
+  .btn--outline:hover { border-color: var(--brand-ink); color: var(--brand-ink); }
+
+  /* Nav link. The current page sits in mint brackets: ‹ Services ›. The brackets hang outside the word,
+     so they take no space: links line up in a column and nothing moves when they appear. */
+  .nav-link {
+    position: relative; display: inline-flex; align-items: center; min-height: var(--tap);
+    color: var(--ink); font-size: var(--step--1); text-decoration: none;
+  }
+  .nav-link:hover { color: var(--brand-ink); }
+  .nav-link::before, .nav-link::after { position: absolute; color: var(--brand-ink); opacity: 0; transition: opacity var(--dur-fast); }
+  .nav-link::before { content: '‹'; right: calc(100% + 0.35em); }
+  .nav-link::after { content: '›'; left: calc(100% + 0.35em); }
+  .nav-link[aria-current]::before, .nav-link[aria-current]::after, .nav-link:hover::before, .nav-link:hover::after { opacity: 1; }
+  .nav-link[aria-current] { color: var(--brand-ink); }
+
+  /* Tag: tech or role on a project card ("Javascript", "PHP"). */
+  .tag {
+    display: inline-block; padding: 0.2em 0.6em;
+    background: var(--surface-2); border-radius: var(--radius-xs);
+    font-size: var(--step--2); line-height: 1.4; color: var(--ink-muted);
+  }
+  .tags { display: flex; flex-wrap: wrap; gap: 0.4rem; list-style: none; padding: 0; }
+
+  /* Card: a raised panel with the long soft shadow. */
+  .card {
+    padding: var(--space-m); background: var(--surface); border-radius: var(--radius-s);
+    box-shadow: var(--shadow-m);
+  }
+  .card--link { transition: transform var(--dur) var(--ease-out), box-shadow var(--dur) var(--ease-out); }
+  .card--link:hover { transform: translateY(-4px); box-shadow: var(--shadow-l); }
+
+  /* Icon: inline SVG that takes the text colour. Icon in mint: add .icon--brand. */
+  .icon { width: 1.25em; height: 1.25em; flex: none; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+  .icon--brand { color: var(--brand-ink); }
+  .icon--fill, .icon .f { fill: currentColor; stroke: none; }
+
+  /* Icon chip: a round raised disc holding an icon or logo (the floating tech icons in the hero). */
+  .chip {
+    display: grid; place-items: center; width: var(--chip-size, 4rem); aspect-ratio: 1;
+    background: var(--surface); border-radius: var(--radius-round); box-shadow: var(--shadow-m);
+    color: var(--brand-ink);
+  }
+  .chip .icon { width: 40%; height: 40%; }
+  .chip img { width: 100%; height: 100%; border-radius: inherit; }
+
+  /* Stat: a number with a two-line label beside it ("12  YEARS / EXPERIENCE"). */
+  .stat { display: inline-flex; align-items: center; gap: var(--space-xs); }
+  .stat__num { font-size: var(--step-4); font-weight: var(--weight-light); line-height: 1; letter-spacing: -0.04em; }
+  .stat__label { font-size: var(--step--2); line-height: 1.4; color: var(--ink-subtle); text-transform: uppercase; letter-spacing: 0.06em; max-width: 14ch; }
+
+  /* Stars: the rating above a testimonial. */
+  .stars { display: inline-flex; align-items: center; gap: 0.15rem; color: var(--brand-ink); }
+  .stars .icon { width: 0.85rem; height: 0.85rem; }
+  .stars__text { margin-left: 0.5rem; font-size: var(--step--2); color: var(--ink-subtle); }
+
+  /* Quote: testimonials, in the system sans like the design. */
+  .quote { font-family: var(--font-sans); font-size: var(--step-1); line-height: 1.6; }
+  .cite { display: flex; align-items: center; gap: var(--space-xs); font-style: normal; }
+  .cite img { width: 2.5rem; height: 2.5rem; border-radius: var(--radius-round); }
+  .cite strong { display: block; font-size: var(--step--1); font-weight: var(--weight-strong); }
+  .cite span { display: block; font-size: var(--step--2); color: var(--ink-subtle); }
+
+  /* Form fields */
+  .field { display: grid; gap: 0.4rem; }
+  .field label { font-size: var(--step--1); color: var(--ink-muted); }
+  .field .hint { font-size: var(--step--2); color: var(--ink-subtle); }
+  .input, .textarea, .select {
+    width: 100%; min-height: var(--tap); padding: 0.65em 0.85em;
+    background: var(--field); border: 1px solid var(--field-border); border-radius: var(--radius-s);
+  }
+  .textarea { min-height: 8rem; resize: vertical; }
+  .input:focus-visible, .textarea:focus-visible, .select:focus-visible { outline-offset: 1px; border-color: var(--focus); }
+  .field--error .input, .field--error .textarea { border-color: var(--danger); }
+  .field--error .hint { color: var(--danger); }
+  .check { display: flex; align-items: center; gap: 0.6em; min-height: var(--tap); font-size: var(--step--1); }
+  .check input { width: 1.1rem; height: 1.1rem; accent-color: var(--brand); }
+
+  /* Notices */
+  .notice { padding: var(--space-xs) var(--space-s); border-left: 3px solid; font-size: var(--step--1); }
+  .notice--success { background: var(--success-soft); border-color: var(--success); }
+  .notice--danger { background: var(--danger-soft); border-color: var(--danger); }
+}

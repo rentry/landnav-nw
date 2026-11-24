@@ -1,0 +1,73 @@
+{%- comment -%}
+  Testimonials: what clients say.
+  Variants:
+    tabs  one quote card at a time; the people underneath are tabs, with a mint bar that slides between them. The design.
+          Without JavaScript every quote shows as its own card and the row of people is hidden.
+    grid  every quote in its own card, 1, 2 or 3 columns by screen width. Best for six quotes or more.
+  Fields: heading, note, items [{ quote, name, role, company, company_url, rating (1 to 5, optional),
+          avatar { src, width, height } }]
+  The avatar's alt is empty on purpose: the name is right beside it.
+  The tabs script is printed once per page, however many times this section appears.
+{%- endcomment -%}
+{%- assign s = include.section -%}
+{%- assign hid = s.id | default: 'testimonials' -%}{%- if include.prefix %}{% assign hid = include.prefix | append: '-' | append: hid %}{% endif -%}
+{%- assign title_id = hid | append: '-title' -%}
+{%- assign tabbed = true -%}{%- if s.variant == 'grid' %}{% assign tabbed = false %}{% endif -%}
+{%- capture cards -%}
+  {%- for it in s.items %}
+  {%- capture cite -%}
+    <div class="cite tst__cite">
+      {%- if it.avatar %}{% include image.html image=it.avatar class="tst__avatar" %}{% endif %}
+      <span><strong>{{ it.name }}</strong>
+      <span>{{ it.role }}{% if it.company %}{% if it.role %}, {% endif %}{% if it.company_url %}{% include url.html url=it.company_url %}<a class="tst__co" href="{{ href }}">{{ it.company }}</a>{% else %}<span class="tst__co">{{ it.company }}</span>{% endif %}{% endif %}</span></span>
+    </div>
+  {%- endcapture %}
+  <div class="card tst__card" data-reveal{% if tabbed %} id="{{ hid }}-panel-{{ forloop.index0 }}"{% else %} style="--i: {{ forloop.index0 | modulo: 3 }}"{% endif %}>
+    {% include icon.html name="quote" class="tst__mark" %}
+    {%- if it.rating %}
+    {%- assign n = it.rating | floor | at_least: 1 | at_most: 5 %}
+    <p class="stars">{% for i in (1..n) %}{% include icon.html name="star" %}{% endfor %}<span class="stars__text">{{ it.rating | times: 1.0 | round: 1 }} {{ site.data.strings.rating | default: 'rating' }}</span></p>
+    {%- endif %}
+    <blockquote class="quote tst__quote"><p>{{ it.quote }}</p></blockquote>
+    {{ cite }}
+  </div>
+  {%- endfor %}
+{%- endcapture -%}
+<section {% include section-attrs.html section=s default='tabs' prefix=include.prefix %} aria-labelledby="{{ title_id }}">
+  <div class="wrap">
+    <div class="tst__inner">
+      <div data-reveal>{% include section-head.html section=s id=title_id %}</div>
+      {%- if tabbed %}
+      <div class="tst" data-tabs>
+        <div class="tst__panels">{{ cards }}</div>
+        <div class="tst__tabs" role="tablist" aria-label="{{ s.heading | default: site.data.strings.testimonials | default: 'Testimonials' | strip_html | escape }}">
+          {%- for it in s.items %}
+          <button class="tst__tab" type="button" role="tab" id="{{ hid }}-tab-{{ forloop.index0 }}" aria-controls="{{ hid }}-panel-{{ forloop.index0 }}" aria-selected="{% if forloop.first %}true{% else %}false{% endif %}"{% unless forloop.first %} tabindex="-1"{% endunless %}>
+            {%- if it.avatar %}{% include image.html image=it.avatar class="tst__avatar" %}{% endif %}
+            <span class="tst__who"><strong>{{ it.name }}</strong><span>{{ it.role }}{% if it.company %}{% if it.role %}, {% endif %}<span class="tst__co">{{ it.company }}</span>{% endif %}</span></span>
+          </button>
+          {%- endfor %}
+          <span class="tst__bar" aria-hidden="true"></span>
+        </div>
+      </div>
+      {%- else %}
+      <div class="tst tst--grid">{{ cards }}</div>
+      {%- endif %}
+    </div>
+  </div>
+</section>
+{%- if tabbed and izar_tabs_js != true %}
+<script>
+/* Tabs: arrows, Home and End move between people; only the selected tab is in the tab order.
+   The mint bar is placed by CSS from --i and --n, so the script never measures the layout. */
+document.addEventListener('DOMContentLoaded',function(){document.querySelectorAll('[data-tabs]').forEach(function(r){
+var t=[].slice.call(r.querySelectorAll('[role=tab]')),p=[].slice.call(r.querySelectorAll('.tst__card')),c=0;
+function go(i,f){c=i;t.forEach(function(e,j){e.setAttribute('aria-selected',j==i);e.tabIndex=j==i?0:-1;p[j].hidden=j!=i});
+r.style.setProperty('--i',i);if(f)t[i].focus()}
+p.forEach(function(e,j){e.setAttribute('role','tabpanel');e.setAttribute('aria-labelledby',t[j].id);e.tabIndex=0});
+t.forEach(function(e,j){e.onclick=function(){go(j)}});
+r.querySelector('[role=tablist]').onkeydown=function(e){var k=e.key,n=t.length,i=k=='ArrowRight'?(c+1)%n:k=='ArrowLeft'?(c+n-1)%n:k=='Home'?0:k=='End'?n-1:-1;if(i<0)return;e.preventDefault();go(i,1)};
+r.style.setProperty('--n',t.length);r.classList.add('is-tabs');go(0)})});
+</script>
+{%- assign izar_tabs_js = true %}
+{%- endif %}

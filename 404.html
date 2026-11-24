@@ -1,0 +1,15 @@
+---
+layout: default
+title: Page not found
+permalink: /404.html
+sitemap: false
+noindex: true
+---
+{% include header.html %}
+<main id="main" class="section wrap">
+  <p class="badge">404</p>
+  <h1 style="margin-top: var(--space-s)">{{ site.data.strings.not_found_title | default: 'Nothing here.' }}<br>{{ site.data.strings.not_found_title_2 | default: 'Not even the code.' }}</h1>
+  <p class="lede" style="margin-top: var(--space-s)">{{ site.data.strings.not_found | default: "That page doesn't exist, or it has moved." }}</p>
+  <p style="margin-top: var(--space-m)"><a class="cmd" href="{{ '/' | relative_url }}">{{ site.data.strings.back_home | default: 'Back to the home page' }}</a></p>
+</main>
+{% include footer.html %}

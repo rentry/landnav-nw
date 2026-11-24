@@ -1,0 +1,22 @@
+- type: services
+  variant: intro
+  tone: band
+  eyebrow: Introduce
+  heading: Hello! I'm Daniel Stephan
+  lead: Every great design begins with an even better story
+  text: |
+    Since beginning my journey as a freelance designer nearly 8 years ago, I've done remote work for agencies, consulted for startups, and collaborated with talented people to create digital products for both business and consumer use. I'm quietly confident, naturally curious, and perpetually working on improving my chopstick dexterity.
+  items:
+    - title: Design
+      text: Create digital products and unique ideas
+      icon: pen
+      count: 20 projects
+      highlight: true
+    - title: Front-End
+      text: Bring them to life with super smooth code
+      icon: code
+      count: 40 projects
+    - title: SEO
+      text: Boost your business with SEO optimized sites
+      icon: target
+      count: 10 projects

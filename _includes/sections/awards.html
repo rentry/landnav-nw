@@ -1,0 +1,31 @@
+{%- comment -%}
+  Awards: recognition, grouped by year.
+  Variants:
+    list  the year in small mint text on the left; on the right each award as two lines, who gave it and what for. The design.
+  Fields: heading, note, years [{ year, items [{ org, award, project, url }] }]
+  org is the body that gave it ("Awwwards"), award is the title ("Site of the Year"), project is what won.
+  url is optional and links the project name.
+{%- endcomment -%}
+{%- assign s = include.section -%}
+{%- assign hid = s.id | default: 'awards' -%}{%- if include.prefix %}{% assign hid = include.prefix | append: '-' | append: hid %}{% endif -%}
+{%- assign title_id = hid | append: '-title' -%}
+<section {% include section-attrs.html section=s default='list' prefix=include.prefix %} aria-labelledby="{{ title_id }}">
+  <div class="wrap">
+    <div class="awd">
+      <div data-reveal>{% include section-head.html section=s id=title_id %}</div>
+      {%- for y in s.years %}
+      <div class="awd__year" data-reveal>
+        <h3 class="awd__when">{{ y.year }}</h3>
+        <ul class="awd__list">
+          {%- for a in y.items %}
+          <li>
+            <p class="awd__org">{{ a.org }}</p>
+            <p class="awd__award">{{ a.award }}{% if a.project %} {{ site.data.strings.award_for | default: 'for' }} {% if a.url %}{% include url.html url=a.url %}<a class="awd__project" href="{{ href }}">{{ a.project }}</a>{% else %}<strong class="awd__project">{{ a.project }}</strong>{% endif %}{% endif %}</p>
+          </li>
+          {%- endfor %}
+        </ul>
+      </div>
+      {%- endfor %}
+    </div>
+  </div>
+</section>

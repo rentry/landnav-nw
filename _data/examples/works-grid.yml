@@ -1,0 +1,11 @@
+- type: works
+  variant: grid
+  tone: default
+  heading: Latest Works
+  note: Perfect solutions for digital experience
+  limit: 4
+  items: [lewis, finaco, focus]
+  link:
+    label: All projects
+    url: /works/
+  footnote: '\* Some projects aren''t public because of NDAs. If you''d like to see more, [contact me](/contact/).'

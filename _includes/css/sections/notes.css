@@ -1,0 +1,62 @@
+/* Notes: the post list (rows between hairlines) and the three-across cards. Post meta is styled here so the post layout gets it too. */
+@layer sections {
+  .sec-notes { padding-block: var(--space-xl) var(--section-space); }
+  .sec-notes--cards { padding-block: var(--section-space); }
+  .notes { display: grid; gap: var(--space-l); }
+  .notes__foot { display: grid; justify-items: start; }
+  .notes__topics { margin: 0; }
+
+  /* Tags variant: one block per topic, the heading then its rows. */
+  .notes__group { display: grid; gap: var(--space-s); }
+  .notes--tags { gap: var(--space-xl); }
+  .notes__tag { font-size: var(--step-3); scroll-margin-top: calc(var(--header-height) + 1rem); }
+  .notes__count {
+    display: inline-block; margin-left: 0.3em; padding: 0.1em 0.55em; vertical-align: middle;
+    background: var(--surface-2); border-radius: var(--radius-xs);
+    font-family: var(--font-mono); font-size: var(--step--1); color: var(--ink-muted);
+  }
+  .notes__list { list-style: none; padding: 0; margin: 0; border-top: var(--hairline); }
+
+  .post-meta {
+    display: flex; flex-wrap: wrap; gap: 0 0.6em; margin: 0;
+    font-family: var(--font-mono); font-size: var(--step--2); color: var(--ink-subtle); letter-spacing: 0.02em;
+  }
+
+  /* The title link stretches over the whole row or card, so all of it is clickable.
+     The focus ring moves from the words to the whole block. */
+  .note__link { color: var(--ink); text-decoration: none; }
+  .note__link::after { content: ''; position: absolute; inset: 0; }
+  .note__link:hover { color: var(--brand-ink); }
+  .note__link:focus-visible { outline: none; }
+  .note__link:focus-visible::after { outline: 2px solid var(--focus); outline-offset: 2px; border-radius: var(--radius-s); }
+
+  .note {
+    position: relative; display: grid; gap: var(--space-2xs); justify-items: start;
+    padding-block: var(--space-m); border-bottom: var(--hairline);
+  }
+  .note:has(.note__link:hover) .note__title a { color: var(--brand-ink); }
+  .note__title { font-size: var(--step-2); line-height: var(--leading-snug); }
+  .note__text { color: var(--ink-muted); font-size: var(--step--1); max-width: 40em; }
+  /* The chips sit above the stretched title link so they stay clickable. */
+  .note__tags { margin: var(--space-3xs) 0 0; position: relative; z-index: 1; }
+
+  /* Topic chips are links to /notes/tags/#topic. The link is the whole chip, so it gets its own hover and focus style. */
+  .tag--link { padding: 0; }
+  .tag__link {
+    display: inline-flex; align-items: center; min-height: 1.75rem; padding: 0.2em 0.6em;
+    color: inherit; text-decoration: none; border-radius: var(--radius-xs);
+  }
+  .tag__link:hover { color: var(--brand-ink); }
+  .tag__link:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+
+  .note-card { position: relative; display: grid; align-content: start; gap: var(--space-xs); }
+  .note-card__title { font-size: var(--step-1); }
+  .note-card__text { color: var(--ink-muted); font-size: var(--step--1); }
+  .note-card__read { margin-top: var(--space-2xs); min-height: 0; justify-self: start; }
+  .note-card:hover .note-card__read { color: var(--brand-ink-hover); text-underline-offset: 0.3em; }
+  .note-card__read .icon { width: 1em; height: 1em; }
+
+  .notes__cards { display: grid; gap: var(--space-m); }
+  @media (min-width: 36em) { .notes__cards { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (min-width: 60em) { .notes__cards { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+}

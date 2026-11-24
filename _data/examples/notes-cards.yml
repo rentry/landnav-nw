@@ -1,0 +1,9 @@
+- type: notes
+  variant: cards
+  tone: band
+  heading: From the Notes
+  note: What I'm learning as I build
+  limit: 3
+  link:
+    label: All notes
+    url: /notes/

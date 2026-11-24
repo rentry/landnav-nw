@@ -1,0 +1,40 @@
+/* Hero: portrait (the design) and text. */
+@layer sections {
+  .sec-hero { padding-block: var(--space-xl) var(--space-2xl); overflow: clip; }
+  .hero__grid { display: grid; gap: var(--space-xl); align-items: center; }
+  .hero__body { display: grid; justify-items: start; gap: var(--space-m); }
+  .hero__title { font-size: var(--step-5); }
+  .hero__text { font-size: var(--step--1); color: var(--ink-muted); max-width: 30em; }
+  .hero__body .cmd { margin-top: calc(var(--space-2xs) * -1); }
+  .hero__stats { display: flex; flex-wrap: wrap; gap: var(--space-m) var(--space-xl); margin-top: var(--space-l); }
+  .hero__stats dd { margin: 0; }
+
+  /* The portrait stands on the bottom of the hero, in front of a soft disc, with chips floating round it. */
+  /* On phones the portrait sits under the text, so it stays modest (20rem) instead of a full screen tall. */
+  .hero__media { position: relative; justify-self: center; width: min(100%, 20rem); margin-bottom: calc(var(--space-2xl) * -1); }
+  @media (min-width: 36em) { .hero__media { width: min(100%, 30rem); } }
+  .hero__disc {
+    position: absolute; inset: 6% -2% auto 8%; aspect-ratio: 1; border-radius: var(--radius-round);
+    background: linear-gradient(135deg, light-dark(var(--graphite-100), #1f2125), light-dark(var(--graphite-50), #2a2d31));
+  }
+  .hero__portrait { position: relative; width: 100%; }
+  .hero__chip { position: absolute; z-index: 1; }
+  .hero__chip img { width: 46%; height: auto; border-radius: 0; }
+  .hero__chip--s { --chip-size: clamp(2.5rem, 7vw, 3.25rem); }
+  .hero__chip--m { --chip-size: clamp(3.5rem, 10vw, 4.75rem); }
+  .hero__chip--l { --chip-size: clamp(4.25rem, 13vw, 6rem); }
+  .hero__chip--left { left: -2%; top: 52%; }
+  .hero__chip--top { right: 4%; top: 14%; }
+  .hero__chip--right { right: -3%; top: 66%; }
+  .hero__dot { position: absolute; border-radius: var(--radius-round); }
+  .hero__dot--a { width: 0.9rem; height: 0.9rem; right: 9%; top: 6%; background: var(--surface-2); }
+  .hero__dot--b { width: 0.4rem; height: 0.4rem; right: -6%; top: 46%; background: var(--brand); }
+
+  @media (min-width: 60em) {
+    .sec-hero--portrait { padding-block: var(--space-l) 0; }
+    .sec-hero--portrait .hero__grid { grid-template-columns: 1fr 1.05fr; align-items: end; }
+    .sec-hero--portrait .hero__body { padding-bottom: var(--space-2xl); }
+    .sec-hero--portrait .hero__media { width: 100%; max-width: 35rem; justify-self: end; margin-bottom: 0; }
+    .sec-hero--text { padding-block: var(--space-3xl); }
+  }
+}

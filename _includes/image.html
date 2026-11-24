@@ -1,0 +1,19 @@
+{%- comment -%}
+  A responsive WebP image. Images made by scripts/images.mjs are named <name>-<width>.webp, so give
+  `src` without the size and list the `widths`:
+    image: { src: /assets/img/work/lewis, widths: [360, 710], width: 710, height: 709, alt: "..." }
+  The browser then picks the smallest file that fits, using `sizes` (how wide the image shows).
+  A plain file works too: { src: /assets/img/me.jpg, width: 800, height: 600, alt: "..." }
+  width and height are the image's own pixel size, so the page doesn't jump while it loads.
+  eager=true only for the first big image on the page.
+{%- endcomment -%}
+{%- assign img = include.image -%}
+{%- if img.widths -%}
+  {%- assign last = img.widths | last -%}
+  {%- capture file %}{{ img.src }}-{{ last }}.webp{% endcapture -%}
+  {%- include url.html url=file -%}{%- assign main = href -%}
+  {%- capture srcset -%}{%- for w in img.widths -%}{%- capture f %}{{ img.src }}-{{ w }}.webp{% endcapture %}{% include url.html url=f %}{{ href }} {{ w }}w{% unless forloop.last %}, {% endunless %}{%- endfor -%}{%- endcapture -%}
+{%- else -%}
+  {%- include url.html url=img.src -%}{%- assign main = href -%}{%- assign srcset = nil -%}
+{%- endif -%}
+<img src="{{ main }}"{% if srcset %} srcset="{{ srcset }}" sizes="{{ include.sizes | default: '100vw' }}"{% endif %} alt="{{ img.alt | escape }}"{% if img.width %} width="{{ img.width }}" height="{{ img.height }}"{% endif %}{% if include.eager %} fetchpriority="high"{% else %} loading="lazy"{% endif %} decoding="async"{% if include.class %} class="{{ include.class }}"{% endif %}>

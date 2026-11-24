@@ -1,0 +1,82 @@
+/* Izar base: reset, typography, links, focus, reveal on scroll, reduced motion. */
+@layer base {
+  *, *::before, *::after { box-sizing: border-box; }
+  * { margin: 0; }
+  html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; scroll-behavior: smooth; scroll-padding-top: calc(var(--header-height) + 1rem); }
+  body {
+    min-height: 100vh;
+    background: var(--page);
+    color: var(--ink);
+    font-family: var(--font-body);
+    font-size: var(--step-0);
+    font-weight: var(--weight-body);
+    line-height: var(--leading-body);
+    -webkit-font-smoothing: antialiased;
+  }
+  img, picture, svg, video { display: block; max-width: 100%; height: auto; }
+  input, button, textarea, select { font: inherit; color: inherit; }
+  button { cursor: pointer; }
+  p, li, figcaption { overflow-wrap: break-word; text-wrap: pretty; }
+
+  /* Headings: regular weight and tight tracking, so the mono reads as a display face. */
+  h1, h2, h3, h4 { font-family: var(--font-display); line-height: var(--leading-snug); overflow-wrap: break-word; text-wrap: balance; }
+  h1, h2, .display { font-weight: var(--weight-body); letter-spacing: var(--tracking-display); line-height: var(--leading-tight); }
+  h1 { font-size: var(--step-6); }
+  h2 { font-size: var(--step-4); }
+  h3 { font-size: var(--step-1); font-weight: var(--weight-body); letter-spacing: -0.01em; }
+  h4 { font-size: var(--step-0); font-weight: var(--weight-strong); }
+  strong, b { font-weight: var(--weight-strong); }
+  small { font-size: var(--step--1); }
+
+  a { color: var(--brand-ink); text-decoration-thickness: 1px; text-underline-offset: 0.25em; }
+  a:hover { color: var(--brand-ink-hover); text-decoration-thickness: 2px; }
+
+  mark { background: var(--highlight); color: var(--on-highlight); padding: 0 0.15em; }
+  code, kbd, pre { font-family: var(--font-mono); font-size: 0.92em; }
+  :not(pre) > code { padding: 0.1em 0.35em; background: var(--surface-2); border-radius: var(--radius-xs); }
+  hr { border: 0; border-top: var(--hairline); }
+  ::selection { background: var(--brand); color: var(--on-brand); }
+
+  /* Long reading: blog posts and anything marked .prose use the system sans. */
+  .prose { font-family: var(--font-sans); font-size: var(--step-1); line-height: 1.7; }
+  .prose > * + * { margin-top: 1.1em; }
+  .prose h2, .prose h3 { margin-top: 1.8em; }
+
+  :focus-visible { outline: 2px solid var(--focus); outline-offset: 3px; border-radius: var(--radius-xs); }
+
+  .skip-link {
+    position: absolute; left: var(--gutter); top: -100%;
+    z-index: 100; padding: 0.6rem 1rem;
+    background: var(--brand); color: var(--on-brand); text-decoration: none;
+  }
+  .skip-link:focus { top: 0.75rem; }
+
+  .visually-hidden {
+    position: absolute !important; width: 1px; height: 1px; padding: 0; margin: -1px;
+    overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+  }
+
+  /* Reveal on scroll. Add data-reveal to anything below the first screen; never to the hero, whose
+     heading and picture must paint at once for a fast Largest Contentful Paint.
+     Only opacity and transform move, so nothing shifts the layout. The `reveal` class is set by a
+     one-line script in <head>, so without JavaScript everything simply shows. If the observer script
+     never starts (an error, a blocked script), a 2.5 s fallback shows everything anyway; once it starts it
+     sets reveal-ready, which turns the fallback off so sections further down still fade in when reached. --i staggers items in a group (style="--i: 2"). */
+  @media (prefers-reduced-motion: no-preference) {
+    .reveal [data-reveal] {
+      opacity: 0;
+      transform: translateY(var(--reveal-distance));
+      transition: opacity var(--dur-reveal) var(--ease-out), transform var(--dur-reveal) var(--ease-out);
+      transition-delay: calc(var(--i, 0) * var(--reveal-stagger));
+      animation: reveal-fallback 0s 2.5s forwards;
+    }
+    .reveal-ready [data-reveal] { animation: none; }
+    .reveal [data-reveal].is-in { opacity: 1; transform: none; animation: none; }
+  }
+  @keyframes reveal-fallback { to { opacity: 1; transform: none; } }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+  }
+}

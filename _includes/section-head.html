@@ -1,0 +1,16 @@
+{%- comment -%}
+  Section heading with a small note beside it, like the design: "Latest Works   Perfect solutions for digital experience".
+  Fields on the section: eyebrow (tiny word above), heading, note (beside the heading), intro (a paragraph under it).
+  Pass id= so the section can point aria-labelledby at the heading.
+{%- endcomment -%}
+{%- assign s = include.section -%}
+{%- if s.heading or s.eyebrow -%}
+<header class="sec-head">
+  {%- if s.eyebrow %}<p class="eyebrow">{{ s.eyebrow }}</p>{% endif %}
+  <div class="section-head">
+    {%- if s.heading %}<h2 id="{{ include.id }}">{% include inline.html text=s.heading %}</h2>{% endif %}
+    {%- if s.note %}<p>{{ s.note }}</p>{% endif %}
+  </div>
+  {%- if s.intro %}<div class="sec-head__intro lede">{{ s.intro | markdownify }}</div>{% endif %}
+</header>
+{%- endif -%}

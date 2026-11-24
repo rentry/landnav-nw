@@ -1,0 +1,12 @@
+/research export-ignore
+
+# Demo-only pictures: shown on the live demo, never in a buyer's download.
+# The buyer zip gets stand-ins with the same names from scripts/stand-ins.mjs.
+/assets/img/hero/developer-*.webp export-ignore
+/assets/img/hero/logo-*.webp export-ignore
+/assets/img/work/lewis-*.webp export-ignore
+/assets/img/work/finaco-*.webp export-ignore
+/assets/img/work/focus-*.webp export-ignore
+/assets/img/people/*.webp export-ignore
+/assets/img/og.png export-ignore
+/CREDITS.md export-ignore

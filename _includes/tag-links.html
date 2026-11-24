@@ -1,0 +1,7 @@
+{%- comment -%}
+  A row of topic chips, each linking to its group on the topics page (/notes/tags/#design).
+  Pass tags=<a list of tag names> and class=<extra class for the list>.
+  The link address is built without url.html so the caller's `href` variable is left alone.
+{%- endcomment -%}
+{%- assign tl_base = '/notes/tags/' | relative_url -%}
+<ul class="tags {{ include.class }}" aria-label="{{ site.data.strings.topics | default: 'Topics' }}">{% for t in include.tags %}<li class="tag tag--link"><a class="tag__link" href="{{ tl_base }}#{{ t | slugify }}">{{ t }}</a></li>{% endfor %}</ul>

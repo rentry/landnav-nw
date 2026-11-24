@@ -1,0 +1,70 @@
+{%- comment -%}
+  Notes: your latest blog posts. It reads the posts in _posts/ (newest first), not inline items.
+  Variants:
+    list   rows between hairlines: date and reading time, title, description, tags. For the /notes/ page.
+    cards  three raised cards across (two, then one on narrower screens), each with a "Read" hint. For the home page or a sidebar.
+    tags   every topic (tag) as its own group: an h2 with the topic and its post count, then its posts as list rows. For /notes/tags/.
+           Groups are in alphabetical order and each h2's id is the topic slugified, so /notes/tags/#design works.
+  Fields: heading, note, eyebrow, intro (see section-head), limit (how many posts; default: all for list, 3 for cards; ignored by tags),
+          tag (only posts with this tag; ignored by tags), link { label, url } (e.g. "All notes" to /notes/),
+          topics_link { url, label } (a small "All topics" link above the list; label is optional and comes from _data/strings.yml)
+  Every topic chip links to /notes/tags/#<topic>. All fixed words come from _data/strings.yml.
+{%- endcomment -%}
+{%- assign s = include.section -%}
+{%- assign nid = s.id | default: 'notes' -%}{%- if include.prefix %}{% assign nid = include.prefix | append: '-' | append: nid %}{% endif -%}
+{%- assign v = s.variant | default: 'list' -%}
+{%- assign list = site.posts -%}
+{%- if v == 'tags' -%}
+  {%- capture tag_names %}{% for t in site.tags %}{{ t[0] }}|{% endfor %}{% endcapture -%}
+  {%- assign tag_names = tag_names | split: '|' | sort_natural -%}
+{%- endif -%}
+{%- if s.tag %}{% assign list = list | where_exp: 'p', 'p.tags contains s.tag' %}{% endif -%}
+{%- assign max = s.limit -%}
+{%- if v == 'cards' and max == nil %}{% assign max = 3 %}{% endif -%}
+{%- if max %}{% assign list = list | slice: 0, max %}{% endif -%}
+{%- capture head_id %}{{ nid }}-title{% endcapture -%}
+<section {% include section-attrs.html section=s default='list' prefix=include.prefix %} {% if v == 'tags' and s.heading == nil %}aria-label="{{ site.data.strings.topics | default: 'Topics' }}"{% else %}aria-labelledby="{{ head_id }}"{% endif %}>
+  <div class="wrap notes notes--{{ v }}">
+    {%- comment -%} No visible heading (e.g. under the Notes page header)? A hidden h2 keeps the outline h1 → h2 → h3 for screen readers. {%- endcomment -%}
+    {%- unless s.heading or v == 'tags' %}<h2 class="visually-hidden" id="{{ head_id }}">{{ s.hidden_heading | default: site.data.strings.all_notes | default: 'All notes' }}</h2>{% endunless %}
+    {%- if s.heading or s.eyebrow %}<div class="notes__head" data-reveal>{% include section-head.html section=s id=head_id %}</div>{% endif %}
+    {%- if s.topics_link %}
+    {%- assign topics_url = s.topics_link.url | default: '/notes/tags/' %}{% include url.html url=topics_url %}
+    <p class="notes__topics" data-reveal><a class="cmd cmd--plain" href="{{ href }}">{{ s.topics_link.label | default: site.data.strings.all_topics | default: 'All topics' }}</a></p>
+    {%- endif %}
+    {%- if v == 'tags' %}
+    {%- for name in tag_names %}
+    {%- assign group = site.tags[name] %}
+    <div class="notes__group">
+      <h2 class="notes__tag" id="{{ name | slugify }}" data-reveal>{{ name }} <span class="notes__count">{{ group.size }}<span class="visually-hidden"> {% if group.size == 1 %}{{ site.data.strings.note_one | default: 'note' }}{% else %}{{ site.data.strings.note_many | default: 'notes' }}{% endif %}</span></span></h2>
+      <ul class="notes__list">
+        {%- for p in group %}{% include note-row.html post=p %}{% endfor %}
+      </ul>
+    </div>
+    {%- endfor %}
+    {%- elsif list.size > 0 %}
+    {%- if v == 'cards' %}
+    <div class="notes__cards">
+      {%- for p in list %}
+      {%- include url.html url=p.url %}
+      <article class="card card--link note-card" data-reveal style="--i: {{ forloop.index0 }}">
+        {% include post-meta.html post=p %}
+        <h3 class="note-card__title"><a class="note__link" href="{{ href }}">{{ p.title }}</a></h3>
+        {%- if p.description %}<p class="note-card__text">{{ p.description }}</p>{% endif %}
+        <span class="cmd note-card__read" aria-hidden="true">{{ site.data.strings.read | default: 'Read' }} {% include icon.html name="arrow" %}</span>
+      </article>
+      {%- endfor %}
+    </div>
+    {%- else %}
+    <ul class="notes__list">
+      {%- for p in list %}{% include note-row.html post=p %}{% endfor %}
+    </ul>
+    {%- endif %}
+    {%- else %}
+    <p class="notes__empty muted">{{ site.data.strings.nothing_here | default: 'Nothing here yet.' }}</p>
+    {%- endif %}
+    {%- if s.link %}
+    <div class="notes__foot" data-reveal>{% include url.html url=s.link.url %}<a class="cmd cmd--plain" href="{{ href }}">{{ s.link.label }}</a></div>
+    {%- endif %}
+  </div>
+</section>

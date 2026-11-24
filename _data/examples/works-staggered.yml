@@ -1,0 +1,10 @@
+- type: works
+  variant: staggered
+  tone: default
+  heading: Latest Works
+  note: Perfect solutions for digital experience
+  limit: 3
+  link:
+    label: All projects
+    url: /works/
+  footnote: '\* Some projects aren''t public because of NDAs. If you''d like to see more, [contact me](/contact/).'

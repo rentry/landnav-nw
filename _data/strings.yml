@@ -1,0 +1,85 @@
+# Every word and phrase the theme prints by itself.
+# Translate or reword anything here and it changes everywhere. Your own content
+# (pages, notes, projects, and the settings in _config.yml) is written where it lives, not here.
+# Delete a line and the English text built into the theme is used instead.
+# Also set `lang:` in _config.yml (for example `lang: fr`) so browsers know the page language.
+
+# Date shown on notes. Uses Ruby's strftime codes: %-d is the day, %b the short month, %Y the year.
+# Month names always come out in English, so for another language use a numeric format such as "%d/%m/%Y".
+date_format: "%-d %b %Y"
+
+# --- Navigation and header ---------------------------------------------------
+skip_link: "Skip to content"      # the link that appears when you press Tab on a page
+nav: "Main"                       # screen-reader name of the main menu
+menu: "Menu"                      # the phone menu button
+dark_mode: "Dark mode"            # the light/dark switch
+
+# --- Footer ------------------------------------------------------------------
+footer_nav: "Footer"              # screen-reader name of the footer menu
+footer_heading: "Let's make something amazing together."   # used unless izar.footer.heading is set in _config.yml
+footer_start_by: "Start by"       # used unless izar.footer.action.before is set
+footer_say_hi: "saying hi"        # used unless izar.footer.action.label is set
+footer_info: "Information"        # used unless izar.footer.info_label is set
+all_rights_reserved: "All rights reserved"   # printed after "© 2026"
+
+# --- Notes and posts ---------------------------------------------------------
+all_notes: "All notes"            # back link on a post, and the hidden heading of the notes list
+all_topics: "All topics"          # link from /notes/ to the topics page
+note_one: note        # after a topic's count, read by screen readers: "CSS, 1 note"
+note_many: notes
+topics: "Topics"                  # screen-reader name of a list of topics (tags)
+read: "Read"                      # the hint on a note card
+min_read: "min read"              # after the number: "4 min read"
+previous: "Previous"              # post navigation
+next: "Next"
+more_notes: "More notes"          # screen-reader name of the previous/next links
+written_by: "Written by"          # before the author's name
+about_author: "About the author"  # screen-reader name of the author box
+author_bio: "A freelance front-end developer and designer who builds fast, simple websites by hand."
+say_hello: "Say hello"
+nothing_here: "Nothing here yet."   # a list with no items
+
+# --- Works and projects ------------------------------------------------------
+all_works: "All works"            # back link on a project
+projects: "Projects"              # hidden heading of the projects list
+next_project: "Next project"
+client: "Client"
+year: "Year"
+role: "Role"
+stack: "Stack"
+visit_site: "Visit site"
+clients: "Clients"                # hidden heading of the logos section
+award_for: "for"                  # "Site of the Year for Finaco"
+
+# --- Contact form ------------------------------------------------------------
+your_name: "Your name"
+email: "Email"
+budget: "Budget"
+topic: "What's it about?"
+optional: "(optional)"
+choose_one: "Choose one"
+message: "Message"
+send_message: "Send message"
+form_subject: "New message from your website"   # the subject line of the email you receive
+
+# --- Testimonials ------------------------------------------------------------
+testimonials: "Testimonials"      # screen-reader name of the row of people
+rating: "rating"                  # after the number: "5.0 rating"
+
+# --- 404 and thank-you pages -------------------------------------------------
+not_found_title: "Nothing here."
+not_found_title_2: "Not even the code."
+not_found: "That page doesn't exist, or it has moved."
+back_home: "Back to the home page"
+demo_notice: "This is the theme demo, so nothing was sent. Thanks for trying the form!"
+
+# --- Catalogue (/blocks/) ----------------------------------------------------
+catalogue_title: "Sections"
+catalogue_nav: "Sections in this catalogue"
+every_page: "Every page"
+header_footer: "Header and footer"
+copy_snippet: "Copy snippet"
+copy_link: "Copy link"
+show_snippet: "Show snippet"
+show_settings: "Show settings"
+coming_soon: "Coming in this batch."

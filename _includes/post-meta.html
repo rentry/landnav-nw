@@ -1,0 +1,10 @@
+{%- comment -%}
+  Date and reading time of one post, in small mono text: "28 Oct 2026 · 4 min read".
+  Pass post=<a post document>. Reading time is the word count / 200, rounded up, never under 1.
+  Used by the notes section and the post layout, so the two always agree.
+{%- endcomment -%}
+{%- assign mp = include.post -%}
+{%- assign mins = mp.content | number_of_words | plus: 199 | divided_by: 200 -%}
+{%- assign dfmt = site.data.strings.date_format | default: '%-d %b %Y' -%}
+{%- if mins < 1 %}{% assign mins = 1 %}{% endif -%}
+<p class="post-meta {{ include.class }}"><time datetime="{{ mp.date | date: '%Y-%m-%d' }}">{{ mp.date | date: dfmt }}</time><span aria-hidden="true">·</span><span>{{ mins }} {{ site.data.strings.min_read | default: 'min read' }}</span></p>

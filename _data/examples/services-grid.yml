@@ -1,0 +1,19 @@
+- type: services
+  variant: grid
+  tone: band
+  heading: What I do
+  note: Three ways I can help
+  items:
+    - title: Design
+      text: Create digital products and unique ideas
+      icon: pen
+      count: 20 projects
+      highlight: true
+    - title: Front-End
+      text: Bring them to life with super smooth code
+      icon: code
+      count: 40 projects
+    - title: SEO
+      text: Boost your business with SEO optimized sites
+      icon: target
+      count: 10 projects

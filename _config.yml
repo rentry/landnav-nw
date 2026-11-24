@@ -1,0 +1,133 @@
+# ─────────────────────────────────────────────────────────────────────────────
+# Izar settings. Change the values; keep the names and the indentation.
+# After editing this file, stop and restart `bundle exec jekyll serve`.
+# ─────────────────────────────────────────────────────────────────────────────
+
+# The site's name (browser tab and search results) and a one-line description.
+title: LANDNAV NW
+description: Freelance front-end developer and designer. I design and code beautifully simple things.
+lang: en
+# Your site's address, with no slash at the end. baseurl: only if the site lives in a sub-folder,
+# e.g. "/portfolio" for username.github.io/portfolio. Otherwise leave it "".
+url: "https://izar.tortoizthemes.com"
+baseurl: ""
+
+izar:
+  # ── About you ──────────────────────────────────────────────────────────────
+  # Your name in the header and footer. The first word is set bold.
+  name: Daniel Stephan
+  # What you do, in a few words. Search engines read it (structured data on the home page).
+  role: Front-end developer and designer
+  email: hello@daniel.example
+  address: 116 Fairground Rd, FL 32901, USA
+  # Person (one person) or ProfessionalService (a studio). Tells search engines who the site is about.
+  schema_type: Person
+
+  # ── Header links ───────────────────────────────────────────────────────────
+  # A link is marked as the current page when its url matches the page, when the page sits under it
+  # (/works/lewis/ lights up "Works"), or when the page's url is listed under `also:`.
+  nav:
+    - label: Services
+      url: /#services
+      also: [/]
+    - label: Works
+      url: /works/
+    - label: Notes
+      url: /notes/
+    - label: Contact
+      url: /contact/
+
+  # ── Profiles ───────────────────────────────────────────────────────────────
+  # icon: github | x | linkedin | dribbble | mail. show_in_header: also shows the link in the header.
+  social:
+    - label: Twitter
+      icon: x
+      url: https://x.com/
+      show_in_header: true
+    - label: GitHub
+      icon: github
+      url: https://github.com/
+      show_in_header: true
+    - label: LinkedIn
+      icon: linkedin
+      url: https://www.linkedin.com/
+    - label: Dribbble
+      icon: dribbble
+      url: https://dribbble.com/
+
+  # ── Footer ─────────────────────────────────────────────────────────────────
+  # The closing call to action at the top of the footer, on every page.
+  footer:
+    heading: Let's make something amazing together.
+    action:
+      before: Start by
+      label: saying hi
+      url: /contact/
+    info_label: Information
+
+  # ── Contact form ───────────────────────────────────────────────────────────
+  # provider: web3forms (needs access_key, free at web3forms.com)
+  #         | formspree (needs endpoint, from formspree.io)
+  #         | demo (sends nothing: for trying the theme)
+  form:
+    provider: demo
+    subject: New message from your website
+    # access_key: your-web3forms-key
+    # endpoint: https://formspree.io/f/your-id
+
+  # ── Look and feel ──────────────────────────────────────────────────────────
+  # dark (the design), light, or auto (follow each visitor's system setting).
+  color_scheme: dark
+  # A round light/dark button in the header. Visitors' choice is remembered; color_scheme sets where they start.
+  theme_switch: true
+  # Fade sections in as they scroll into view. Visitors who ask their device for less motion never see it.
+  reveal: true
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Below here you rarely need to change anything.
+# ─────────────────────────────────────────────────────────────────────────────
+
+# Projects: one Markdown file each in _projects/. They fill the Works sections and get their own page.
+collections:
+  projects:
+    output: true
+    permalink: /works/:name/
+
+# Notes (the blog): one Markdown file each in _posts/, named YYYY-MM-DD-title.md.
+permalink: /notes/:title/
+
+# Layouts and page CSS used when a file doesn't name one, and the picture shown when a page is shared
+# on social media (1200 × 630). Set `image:` in a page's front matter to use a different one.
+defaults:
+  - scope: { path: "", type: posts }
+    values: { layout: post, css: [post] }
+  - scope: { path: "", type: projects }
+    values: { layout: project, css: [project, sections/works], seo: { type: CreativeWork } }
+  - scope: { path: "" }
+    values: { image: /assets/img/og.png }
+
+# No GitHub Pages default theme: Izar brings all its own CSS. (Without this line the github-pages gem
+# adds the Primer theme and builds an unused assets/css/style.css.)
+theme: null
+
+plugins:
+  - jekyll-seo-tag
+  - jekyll-sitemap
+  - jekyll-feed
+
+# The Notes feed at /feed.xml. Its link goes in every page's <head>.
+feed:
+  path: feed.xml
+
+exclude:
+  - research
+  - scripts
+  - vendor
+  - node_modules
+  - Gemfile
+  - Gemfile.lock
+  - "*.gemspec"
+  - README.md
+  - LICENSE
+  - CREDITS.md
+  - wrangler.jsonc

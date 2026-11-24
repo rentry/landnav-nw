@@ -1,0 +1,20 @@
+{%- comment -%}
+  One project card: the screenshot on a raised panel, the title top left, the tags top right. The whole card is the link.
+  Pass project=<a document from site.projects>, index=<0, 1, 2 ... for the reveal stagger> and sizes=<how wide the image shows>.
+  eager=true for a card on the first screen: its image loads at once and it doesn't fade in (it may be the page's largest image).
+  Its CSS is in css/sections/works.css, so any page that shows cards must load that file.
+  The reveal sits on the outer div and the hover lift on the link, so the two transforms never fight.
+{%- endcomment -%}
+{%- assign p = include.project -%}
+{%- include url.html url=p.url -%}
+<div class="work"{% unless include.eager %} data-reveal style="--i: {{ include.index | default: 0 }}"{% endunless %}>
+  <a class="card card--link work-card" href="{{ href }}">
+    <div class="work-card__top">
+      <h3 class="work-card__title">{{ p.title }}</h3>
+      {%- if p.tags.size > 0 %}
+      <ul class="tags work-card__tags">{% for t in p.tags %}<li class="tag">{{ t }}</li>{% endfor %}</ul>
+      {%- endif %}
+    </div>
+    {% include image.html image=p.image sizes=include.sizes class="work-card__shot" eager=include.eager %}
+  </a>
+</div>

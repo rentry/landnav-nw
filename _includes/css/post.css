@@ -1,0 +1,81 @@
+/* A Notes post: header, optional cover, the body (.prose, in the system sans), previous/next cards, the author box. */
+@layer sections {
+  .post { padding-block: var(--space-xl) var(--section-space); }
+  .post__top { display: grid; justify-items: start; gap: var(--space-s); }
+  .post__back { display: inline-flex; align-items: center; gap: 0.5em; min-height: var(--tap); font-size: var(--step--1); color: var(--ink-muted); text-decoration: none; }
+  .post__back:hover { color: var(--brand-ink); }
+  .post__title { font-size: var(--step-5); }
+  .post__lead { font-family: var(--font-sans); font-size: var(--step-1); line-height: 1.55; color: var(--ink-muted); max-width: 36em; }
+  .post__tags { margin: 0; }
+
+  /* Topic chips are links to /notes/tags/#topic. The link is the whole chip, so it gets its own hover and focus style. */
+  .tag--link { padding: 0; }
+  .tag__link {
+    display: inline-flex; align-items: center; min-height: 1.75rem; padding: 0.2em 0.6em;
+    color: inherit; text-decoration: none; border-radius: var(--radius-xs);
+  }
+  .tag__link:hover { color: var(--brand-ink); }
+  .tag__link:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+  .post-meta {
+    display: flex; flex-wrap: wrap; gap: 0 0.6em; margin: 0;
+    font-family: var(--font-mono); font-size: var(--step--2); color: var(--ink-subtle); letter-spacing: 0.02em;
+  }
+
+  .post__cover { margin-top: var(--space-l); }
+  .post__img { width: 100%; height: auto; border-radius: var(--radius-m); }
+  .post__body { margin-top: var(--space-xl); max-width: 40em; }
+
+  /* Body content. Headings keep the display face; everything else is the sans. */
+  .prose h2 { font-size: var(--step-3); margin-top: 2.2em; }
+  .prose h3 { font-size: var(--step-2); margin-top: 1.9em; }
+  .prose h2 + *, .prose h3 + * { margin-top: 0.7em; }
+  .prose ul, .prose ol { padding-left: 1.4em; }
+  .prose li + li { margin-top: 0.4em; }
+  .prose li::marker { color: var(--brand-ink); }
+  .prose a { overflow-wrap: anywhere; }
+  .prose img { border-radius: var(--radius-m); }
+  .prose blockquote {
+    margin-inline: 0; padding: 0.2em 0 0.2em 1.2em; border-left: 3px solid var(--brand);
+    color: var(--ink-muted); font-style: italic;
+  }
+  .prose blockquote > * + * { margin-top: 0.6em; }
+  .prose hr { margin-block: 2.2em; }
+  .prose pre, .prose .highlight {
+    background: var(--surface); border-radius: var(--radius-s); box-shadow: var(--shadow-s);
+    font-size: var(--step--1); line-height: 1.6; color: var(--ink);
+  }
+  .prose pre { margin: 0; padding: var(--space-s); overflow-x: auto; max-width: 100%; tab-size: 2; }
+  .prose .highlight { max-width: 100%; }
+  .prose .highlight pre { box-shadow: none; background: none; }
+  .prose pre code { padding: 0; background: none; font-size: inherit; }
+  .prose pre:focus-visible { outline-offset: 2px; }
+  .prose table { display: block; max-width: 100%; overflow-x: auto; border-collapse: collapse; font-size: var(--step--1); }
+  .prose th, .prose td { padding: 0.5em 0.8em; border-bottom: var(--hairline); text-align: left; }
+
+  /* Rouge code colours: four existing tokens, so light and dark both work. */
+  .highlight .c, .highlight .c1, .highlight .cm, .highlight .cs { color: var(--ink-subtle); font-style: italic; }
+  .highlight .k, .highlight .kd, .highlight .kn, .highlight .kr, .highlight .kt, .highlight .nt { color: var(--brand-ink); }
+  .highlight .s, .highlight .s1, .highlight .s2, .highlight .sb, .highlight .se, .highlight .mi, .highlight .mf, .highlight .nv { color: var(--ink); text-decoration: underline; text-decoration-color: var(--highlight); text-decoration-thickness: 1px; text-underline-offset: 0.25em; }
+  .highlight .na, .highlight .nc, .highlight .nf { color: var(--brand-ink); font-weight: var(--weight-strong); }
+  .highlight .o, .highlight .p { color: var(--ink-muted); }
+  .highlight .n { color: var(--ink); }
+
+  .post__end { margin-top: var(--space-2xl); display: grid; gap: var(--space-xl); }
+  .post__nav { display: grid; gap: var(--space-s); }
+  .post__step { display: grid; gap: var(--space-3xs); align-content: start; color: var(--ink); text-decoration: none; }
+  .post__step:hover { color: var(--ink); }
+  .post__step-label { font-size: var(--step--2); color: var(--ink-subtle); letter-spacing: var(--tracking-label); text-transform: uppercase; }
+  .post__step-title { font-size: var(--step-0); line-height: var(--leading-snug); }
+  .post__step--next { text-align: right; }
+  @media (min-width: 36em) {
+    .post__nav { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .post__step--next { grid-column: 2; }
+  }
+
+  .post__author { display: flex; gap: var(--space-s); align-items: flex-start; padding-top: var(--space-l); border-top: var(--hairline); }
+
+  .post__author .chip { flex: none; background: var(--brand); color: var(--on-brand); }
+  .post__initials { font-size: var(--step-0); font-weight: var(--weight-strong); }
+  .post__author-name { font-weight: var(--weight-strong); }
+  .post__author-text { margin-top: var(--space-3xs); font-size: var(--step--1); color: var(--ink-muted); max-width: 32em; }
+}

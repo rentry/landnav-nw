@@ -1,0 +1,53 @@
+/* Colour scales (50 lightest to 950 darkest). Sections never use these directly: they use the names in theme.css, so to re-colour the theme, change the values there. */
+@layer tokens {
+  :root {
+    /* mint: Brand: badge, links, buttons, active nav, icons */
+    --mint-50: #eafcf2;
+    --mint-100: #d1f5e3;
+    --mint-200: #a7ebca;
+    --mint-300: #70d9ab;
+    --mint-400: #30c08b;
+    --mint-500: #07a472;
+    --mint-600: #04865d;
+    --mint-700: #056c4a;
+    --mint-800: #035238;
+    --mint-900: #003b26;
+    --mint-950: #012416;
+    /* graphite: Cool neutrals: pages, cards, text, lines */
+    --graphite-50: #f6f7f8;
+    --graphite-100: #eaebee;
+    --graphite-200: #d7d9de;
+    --graphite-300: #bdc1c7;
+    --graphite-400: #a1a5ac;
+    --graphite-500: #878b92;
+    --graphite-600: #6e7279;
+    --graphite-700: #575b61;
+    --graphite-800: #42454a;
+    --graphite-900: #2e3035;
+    --graphite-950: #1b1d20;
+    /* amber: Highlight: stars and marks, always dark text on it */
+    --amber-50: #fef5e9;
+    --amber-100: #fde8cb;
+    --amber-200: #fad29c;
+    --amber-300: #eeb563;
+    --amber-400: #d89623;
+    --amber-500: #b97d00;
+    --amber-600: #986600;
+    --amber-700: #7a5103;
+    --amber-800: #5e3e02;
+    --amber-900: #432b00;
+    --amber-950: #2a1900;
+    /* red: Errors only */
+    --red-50: #fef4f3;
+    --red-100: #ffe4e1;
+    --red-200: #fecbc6;
+    --red-300: #fea69e;
+    --red-400: #fe736c;
+    --red-500: #e35350;
+    --red-600: #c53637;
+    --red-700: #a42226;
+    --red-800: #820f17;
+    --red-900: #610009;
+    --red-950: #3e0004;
+  }
+}

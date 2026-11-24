@@ -1,0 +1,12 @@
+- type: logos
+  variant: grid
+  heading: Clients I have worked with
+  hide_heading: true
+  items:
+    - { name: Northwind Labs, image: /assets/img/clients/northwind.svg, width: 133, height: 48 }
+    - { name: Kiko, image: /assets/img/clients/kiko.svg, width: 100, height: 44 }
+    - { name: Atlas Travel, image: /assets/img/clients/atlas.svg, width: 120, height: 48 }
+    - { name: "Quill & Co", image: /assets/img/clients/quill.svg, width: 104, height: 48 }
+    - { name: Orbit, image: /assets/img/clients/orbit.svg, width: 121, height: 48 }
+    - { name: Pinecone Coffee, image: /assets/img/clients/pinecone.svg, width: 123, height: 48 }
+    - { name: Halo Studio, image: /assets/img/clients/halo.svg, width: 95, height: 48 }

@@ -1,0 +1,50 @@
+---
+layout: default
+---
+{%- comment -%}
+  A project page. Front matter: title, summary, client, year, role, tags, url (optional "Visit site" link),
+  site_url (optional "Visit site" link; not `url`, which Jekyll reserves for the page's own address),
+  image (the large picture), gallery (optional list of images, same shape as image). The text below the front matter is the write-up.
+  "Next project" is the next one by `order`, wrapping round to the first.
+{%- endcomment -%}
+{%- assign all = site.projects | sort: 'order' -%}
+{%- assign next_p = all.first -%}
+{%- for p in all -%}{%- if p.url == page.url -%}{%- assign at = forloop.index0 | plus: 1 -%}{%- if at < all.size -%}{%- assign next_p = all[at] -%}{%- endif -%}{%- endif -%}{%- endfor -%}
+{% include header.html %}
+<main id="main">
+  <article class="sec project">
+    <div class="wrap project__top">
+      {%- include url.html url='/works/' %}
+      <a class="project__back" href="{{ href }}"><span aria-hidden="true">←</span> {{ site.data.strings.all_works | default: 'All works' }}</a>
+      <h1 class="project__title">{{ page.title }}</h1>
+      {%- if page.summary %}<p class="project__summary">{{ page.summary }}</p>{% endif %}
+      <dl class="project__meta">
+        {%- if page.client %}<div><dt>{{ site.data.strings.client | default: 'Client' }}</dt><dd>{{ page.client }}</dd></div>{% endif %}
+        {%- if page.year %}<div><dt>{{ site.data.strings.year | default: 'Year' }}</dt><dd>{{ page.year }}</dd></div>{% endif %}
+        {%- if page.role %}<div><dt>{{ site.data.strings.role | default: 'Role' }}</dt><dd>{{ page.role }}</dd></div>{% endif %}
+        {%- if page.tags.size > 0 %}<div><dt>{{ site.data.strings.stack | default: 'Stack' }}</dt><dd><ul class="tags">{% for t in page.tags %}<li class="tag">{{ t }}</li>{% endfor %}</ul></dd></div>{% endif %}
+      </dl>
+      {%- if page.site_url %}<a class="cmd project__visit" href="{{ page.site_url }}" rel="noopener">{{ site.data.strings.visit_site | default: 'Visit site' }} <span aria-hidden="true">↗</span></a>{% endif %}
+    </div>
+    {%- if page.image %}
+    <div class="wrap project__shot">
+      <div class="card project__panel">{% include image.html image=page.image eager=true sizes="(min-width: 64em) 1100px, 92vw" class="project__img" %}</div>
+    </div>
+    {%- endif %}
+    <div class="wrap-narrow prose project__body">{{ content }}</div>
+    {%- if page.gallery.size > 0 %}
+    <div class="wrap project__gallery">
+      {%- for g in page.gallery %}
+      <div class="card project__panel" data-reveal style="--i: {{ forloop.index0 }}">{% include image.html image=g sizes="(min-width: 52em) 540px, 92vw" class="project__img" %}</div>
+      {%- endfor %}
+    </div>
+    {%- endif %}
+  </article>
+  <section class="sec project-next tone-band" aria-labelledby="next-title">
+    <div class="wrap project-next__inner">
+      <h2 class="project-next__title" id="next-title" data-reveal>{{ site.data.strings.next_project | default: 'Next project' }}</h2>
+      {% include project-card.html project=next_p index=0 sizes="(min-width: 52em) 540px, 92vw" %}
+    </div>
+  </section>
+</main>
+{% include footer.html %}

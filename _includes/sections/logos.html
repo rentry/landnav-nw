@@ -1,0 +1,25 @@
+{%- comment -%}
+  Logos: the clients you have worked with.
+  Variants:
+    grid  centred rows of logos, up to 5 across on desktop, 3 on tablet, 2 on phone.
+  Fields: heading (optional), hide_heading (true keeps the heading for screen readers only),
+          items [{ name, image, width, height, url }]
+          image: path to a WHITE logo on transparent, SVG or PNG/WebP (Izar darkens it in light mode),
+          width and height: the file's own size (the SVG viewBox), name: becomes the alt text, url: optional link.
+{%- endcomment -%}
+{%- assign s = include.section -%}
+{%- assign sid = s.id | default: s.type -%}{%- if include.prefix %}{% assign sid = include.prefix | append: '-' | append: sid %}{% endif -%}
+<section {% include section-attrs.html section=s default='grid' prefix=include.prefix %} aria-labelledby="{{ sid }}-title">
+  <div class="wrap">
+    <h2 id="{{ sid }}-title"{% if s.hide_heading or s.heading == nil %} class="visually-hidden"{% endif %}>{{ s.heading | default: site.data.strings.clients | default: 'Clients' }}</h2>
+    <ul class="logos__list" role="list" data-reveal>
+      {%- for it in s.items %}
+      <li class="logos__item">
+        {%- include url.html url=it.image %}
+        {%- capture pic %}<img src="{{ href }}" alt="{{ it.name | escape }}" width="{{ it.width }}" height="{{ it.height }}" loading="lazy" decoding="async">{% endcapture -%}
+        {%- if it.url %}{% include url.html url=it.url %}<a class="logos__link" href="{{ href }}">{{ pic }}</a>{% else %}{{ pic }}{% endif %}
+      </li>
+      {%- endfor %}
+    </ul>
+  </div>
+</section>

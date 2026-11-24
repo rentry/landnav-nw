@@ -1,0 +1,23 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+{%- comment -%}
+  Before paint: applies a visitor's saved light/dark choice (so the page never flashes the wrong colours), marks the page as having JavaScript (so script-driven parts like the testimonial tabs lay out right
+  from the first frame) and turns on reveal-on-scroll. A visitor without JavaScript sees everything, plainly.
+{%- endcomment %}
+<script>document.documentElement.classList.add('js'{% if site.izar.reveal != false %},'reveal'{% endif %}){% if site.izar.theme_switch %};try{var t=localStorage.getItem('izar-theme');if(t)document.documentElement.dataset.theme=t}catch(e){}{% endif %}</script>
+<link rel="preload" href="{{ '/assets/fonts/jetbrains-mono-latin-wght.woff2' | relative_url }}" as="font" type="font/woff2" crossorigin>
+<link rel="icon" href="{{ site.favicon | default: '/assets/favicon.svg' | relative_url }}" type="image/svg+xml">
+{% seo %}
+{% feed_meta %}
+{%- assign scheme = site.izar.color_scheme | default: 'dark' %}
+{%- if scheme == 'auto' %}
+<meta name="color-scheme" content="dark light">
+<meta name="theme-color" content="#f4f5f7" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222428" media="(prefers-color-scheme: dark)">
+{%- else %}
+<meta name="color-scheme" content="{{ scheme }}">
+<meta name="theme-color" content="{% if scheme == 'light' %}#f4f5f7{% else %}#222428{% endif %}">
+{%- endif %}
+{% if page.noindex %}<meta name="robots" content="noindex">{% endif %}
+{% if page.url == "/" %}{% include schema.html %}{% endif %}
+{% include styles.html %}

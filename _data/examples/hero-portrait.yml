@@ -1,0 +1,34 @@
+- type: hero
+  variant: portrait
+  badge: Front-End Developer
+  heading: |
+    Talk is cheap.
+    Show me the code
+  text: I design and code beautifully simple things, and I love what I do.
+  action:
+    label: Let's chat!
+    url: /contact/
+  stats:
+    - value: "12"
+      label: Years experience
+    - value: "165"
+      label: Projects completed in 24 countries
+  image:
+    src: /assets/img/hero/developer
+    widths: [380, 560, 754]
+    width: 754
+    height: 764
+    alt: Daniel in a grey hoodie, hood up
+  chips:
+    - image: /assets/img/hero/logo-angular.webp
+      alt: Angular
+      at: left
+      size: m
+    - image: /assets/img/hero/logo-python.webp
+      alt: Python
+      at: top
+      size: s
+    - image: /assets/img/hero/logo-node.webp
+      alt: Node.js
+      at: right
+      size: l

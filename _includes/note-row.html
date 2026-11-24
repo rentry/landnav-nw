@@ -1,0 +1,12 @@
+{%- comment -%}
+  One row of the notes list: date and reading time, title, description, topics. Pass post=<a post document>.
+  Used by the notes section (list and tags variants). The title link covers the whole row; the topic chips sit above it so they stay clickable.
+{%- endcomment -%}
+{%- assign p = include.post -%}
+{%- include url.html url=p.url -%}
+<li class="note" data-reveal>
+  {% include post-meta.html post=p %}
+  <h3 class="note__title"><a class="note__link" href="{{ href }}">{{ p.title }}</a></h3>
+  {%- if p.description %}<p class="note__text">{{ p.description }}</p>{% endif %}
+  {%- if p.tags.size > 0 %}{% include tag-links.html tags=p.tags class="note__tags" %}{% endif %}
+</li>

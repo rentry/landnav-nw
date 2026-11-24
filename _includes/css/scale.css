@@ -1,0 +1,74 @@
+/* Izar scales: type, space, radius, shadow, motion and layout.
+   Type and space are fluid between a 360px and a 1280px screen. */
+@layer tokens {
+  :root {
+    /* Fonts. JetBrains Mono is the only web font and sets nearly everything: it's a developer's theme.
+       Long reading (blog posts, quotes) uses the system sans, which is easier on the eye over many lines. */
+    --font-mono: 'JetBrains Mono', 'JetBrains Mono Consolas', 'JetBrains Mono Menlo', 'JetBrains Mono DejaVu', 'JetBrains Mono Android', 'JetBrains Mono Courier', monospace;
+    --font-sans: ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    --font-display: var(--font-mono);
+    --font-body: var(--font-mono);
+
+    /* Type scale. A monospace font runs wide, so steps are smaller than in a sans theme. */
+    --step--2: clamp(0.75rem, 0.7383rem + 0.0522vw, 0.78rem);
+    --step--1: clamp(0.8125rem, 0.7880rem + 0.1087vw, 0.875rem);
+    --step-0: clamp(0.9375rem, 0.9130rem + 0.1087vw, 1rem);
+    --step-1: clamp(1.0625rem, 1.0087rem + 0.2391vw, 1.2rem);
+    --step-2: clamp(1.25rem, 1.1522rem + 0.4348vw, 1.5rem);
+    --step-3: clamp(1.5rem, 1.3043rem + 0.8696vw, 2rem);
+    --step-4: clamp(1.75rem, 1.4174rem + 1.4783vw, 2.6rem);
+    --step-5: clamp(2.1rem, 1.5913rem + 2.2609vw, 3.4rem);
+    --step-6: clamp(2.4rem, 1.6957rem + 3.1304vw, 4.2rem);
+
+    --leading-tight: 1.15;
+    --leading-snug: 1.3;
+    --leading-body: 1.75;
+    --tracking-display: -0.03em;
+    --tracking-label: 0.12em;
+    --weight-light: 300;
+    --weight-body: 400;
+    --weight-strong: 600;
+
+    /* Space */
+    --space-3xs: clamp(0.25rem, 0.2304rem + 0.0870vw, 0.3rem);
+    --space-2xs: clamp(0.5rem, 0.4609rem + 0.1739vw, 0.6rem);
+    --space-xs: clamp(0.75rem, 0.6913rem + 0.2609vw, 0.9rem);
+    --space-s: clamp(1rem, 0.9217rem + 0.3478vw, 1.2rem);
+    --space-m: clamp(1.5rem, 1.3826rem + 0.5217vw, 1.8rem);
+    --space-l: clamp(2rem, 1.8043rem + 0.8696vw, 2.5rem);
+    --space-xl: clamp(3rem, 2.6087rem + 1.7391vw, 4rem);
+    --space-2xl: clamp(4rem, 3.2174rem + 3.4783vw, 6rem);
+    --space-3xl: clamp(5rem, 3.6304rem + 6.0870vw, 8.5rem);
+    --section-space: var(--space-3xl);
+
+    /* Radius: small and square-ish, like an editor window. Icon chips are the one round shape. */
+    --radius-xs: 2px;
+    --radius-s: 4px;
+    --radius-m: 8px;
+    --radius-round: 50%;
+
+    /* Shadows: cards float on the dark page with a long, soft shadow. */
+    --shadow-s: 0 1px 2px var(--shadow-near);
+    --shadow-m: 0 2px 6px var(--shadow-near), 0 24px 48px -16px var(--shadow-far);
+    --shadow-l: 0 4px 12px var(--shadow-near), 0 40px 80px -24px var(--shadow-far);
+
+    /* Lines */
+    --hairline: 1px solid var(--line);
+
+    /* Motion. Everything stops under prefers-reduced-motion (base.css). */
+    --ease-out: cubic-bezier(0.2, 0.7, 0.2, 1);
+    --dur-fast: 150ms;
+    --dur: 250ms;
+    --dur-reveal: 700ms;
+    --reveal-distance: 1.5rem;
+    --reveal-stagger: 90ms;
+
+    /* Layout */
+    --wrap: 1140px;
+    --wrap-narrow: 720px;
+    --gutter: clamp(1rem, 4vw, 2.5rem);
+    --header-height: 4.5rem;
+    --tap: 2.75rem; /* minimum touch target */
+    --z-header: 50;
+  }
+}

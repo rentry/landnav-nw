@@ -1,0 +1,12 @@
+<!doctype html>
+{%- assign scheme = site.izar.color_scheme | default: 'dark' %}
+<html lang="{{ site.lang | default: 'en' }}"{% unless scheme == 'auto' %} data-theme="{{ scheme }}"{% endunless %}>
+<head>
+{% include head.html %}
+</head>
+<body>
+<a class="skip-link" href="#main">{{ site.data.strings.skip_link | default: 'Skip to content' }}</a>
+{{ content }}
+{% include scripts.html %}
+</body>
+</html>

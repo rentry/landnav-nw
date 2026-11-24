@@ -1,0 +1,67 @@
+/* Testimonials: tabs (the design) and grid. */
+@layer sections {
+  .sec-testimonials { padding-block: var(--section-space); }
+  .tst__inner { --tab-min: 7.5rem; max-width: 55em; margin-inline: auto; display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--space-l); } /* minmax(0,…): the tab row scrolls inside instead of widening the page */
+
+  /* The card. Its quote mark sits top right, faint, so it frames the quote without competing with it. */
+  .tst__card { position: relative; display: flex; flex-direction: column; gap: var(--space-s); padding: var(--space-l) var(--space-m); margin: 0; }
+  .tst__mark { position: absolute; top: var(--space-s); right: var(--space-s); width: 2rem; height: 2rem; color: var(--line-strong); opacity: 0.7; }
+  .tst__quote { margin: 0; padding-right: 2rem; }
+  .tst__quote p { max-width: 36em; }
+  .tst__avatar { width: 2.5rem; height: 2.5rem; border-radius: var(--radius-round); object-fit: cover; flex: none; }
+  .tst__co { color: var(--brand-ink); }
+  a.tst__co:hover { color: var(--brand-ink-hover); }
+  .tst__cite strong { color: var(--ink); }
+  .tst__cite { margin-top: auto; padding-top: var(--space-2xs); }
+
+  /* Without JavaScript: every quote is a card in a stack, and the row of people stays hidden. */
+  .tst__panels { display: grid; gap: var(--space-s); }
+  .tst__tabs { display: none; }
+
+  /* With JavaScript: one card, and the people become tabs. The js class is set in <head> before paint, so the
+     tab layout is there from the first frame; until the script runs, only the first quote shows. No jump. */
+  .js .tst:not(.is-tabs) .tst__card:not(:first-child) { display: none; }
+  .js .tst .tst__panels { display: block; }
+  .js .tst .tst__card[hidden] { display: none; }
+  .js .tst .tst__cite { display: none; }
+  .js .tst .tst__tabs {
+    position: relative; display: flex; margin-top: var(--space-s); overflow-x: auto; scrollbar-width: none;
+    box-shadow: inset 0 -1px var(--line);
+  }
+  .js .tst .tst__tabs::-webkit-scrollbar { display: none; }
+  .tst__tab {
+    flex: 1 1 0; min-width: var(--tab-min); min-height: var(--tap); display: flex; flex-direction: column; align-items: flex-start; gap: var(--space-2xs);
+    padding: var(--space-xs) var(--space-xs) var(--space-s) 0; text-align: left; color: var(--ink);
+    background: none; border: 0; border-radius: 0; font: inherit; cursor: pointer;
+  }
+  .tst__who strong { display: block; font-size: var(--step--1); font-weight: var(--weight-strong); }
+  .tst__who > span { display: block; margin-top: 0.15em; font-size: var(--step--2); line-height: 1.4; color: var(--ink-subtle); }
+  .tst__tab[aria-selected='false'] strong { color: var(--ink-muted); }
+  .tst__tab:hover strong { color: var(--ink); }
+  .tst__tab:focus-visible { outline-offset: -2px; }
+  /* The bar is one tab wide (tabs share the row equally, never narrower than --tab-min) and slides by whole tabs. */
+  .tst__bar {
+    position: absolute; left: 0; bottom: 0; height: 2px; background: var(--brand);
+    width: max(calc(100% / var(--n, 3)), var(--tab-min));
+    transform: translateX(calc(var(--i, 0) * 100%)); transition: transform var(--dur) var(--ease-out);
+  }
+
+  @media (min-width: 40em) {
+    .tst__card { padding: var(--space-l); }
+    .tst__mark { top: var(--space-m); right: var(--space-m); width: 3.5rem; height: 3.5rem; }
+    .tst__quote { padding-right: 4rem; }
+    .tst__inner { --tab-min: 13rem; }
+    .tst__tab { flex-direction: row; align-items: center; gap: var(--space-xs); min-width: var(--tab-min); }
+  }
+
+  /* Grid */
+  .tst--grid { display: grid; gap: var(--space-s); }
+  .tst--grid .tst__quote { font-size: var(--step-0); }
+  .tst--grid .tst__card { padding: var(--space-m); }
+  .tst--grid .tst__mark { width: 2rem; height: 2rem; top: var(--space-s); right: var(--space-s); }
+  @media (min-width: 52em) { .tst--grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (min-width: 64em) {
+    .sec-testimonials--grid .tst__inner { max-width: none; }
+    .tst--grid { grid-template-columns: repeat(3, 1fr); }
+  }
+}

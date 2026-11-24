@@ -1,0 +1,31 @@
+/* Services: intro (cards beside a hello) and grid (cards in a row). */
+@layer sections {
+  .svc__list { display: grid; gap: var(--space-m); }
+  .svc__card { position: relative; display: grid; grid-template-rows: auto auto 1fr; gap: var(--space-2xs); padding: var(--space-m) var(--space-xl) var(--space-m) var(--space-m); }
+  .svc__icon { position: absolute; top: var(--space-m); right: var(--space-m); width: 1.1rem; height: 1.1rem; }
+  .svc__title { font-size: var(--step-0); font-weight: var(--weight-body); letter-spacing: 0; color: var(--ink); }
+  .svc__title--brand { color: var(--brand-ink); }
+  .svc__link { color: inherit; text-decoration: none; }
+  /* The link stretches over the whole card, so the card is one big target. */
+  .svc__link::after { content: ''; position: absolute; inset: 0; }
+  .svc__link:focus-visible { outline: none; }
+  .svc__card:has(.svc__link:focus-visible) { outline: 2px solid var(--focus); outline-offset: 2px; }
+  .svc__text { font-size: var(--step--2); color: var(--ink-subtle); }
+  .svc__count { align-self: end; margin-top: var(--space-2xs); font-size: var(--step--2); font-weight: var(--weight-strong); letter-spacing: var(--tracking-label); text-transform: uppercase; }
+
+  /* Intro: cards and hello. Phones show the hello first. */
+  .svc__intro-grid { display: grid; gap: var(--space-xl); }
+  .svc__hello { display: grid; align-content: start; gap: var(--space-s); }
+  .svc__heading { font-size: var(--step-3); max-width: 14em; }
+  .svc__lead { font-style: italic; font-size: var(--step-1); color: var(--ink-muted); max-width: 22em; line-height: var(--leading-snug); }
+  .svc__text-body { font-size: var(--step--1); color: var(--ink-subtle); max-width: 32em; }
+
+  .sec-services--grid .svc__list { grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr)); }
+
+  @media (min-width: 60em) {
+    .svc__intro-grid { grid-template-columns: 1fr 1fr; gap: var(--space-2xl); align-items: start; }
+    .svc__hello { padding-top: var(--space-s); }
+    .svc__intro-grid .svc__list { order: -1; }
+    .sec-services--grid .svc__list { grid-template-columns: repeat(3, 1fr); }
+  }
+}

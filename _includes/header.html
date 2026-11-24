@@ -1,0 +1,38 @@
+{%- comment -%}
+  Site header: your name, the nav from izar.nav, profile links, the light/dark switch (izar.theme_switch), and on phones a menu button.
+  The phone menu is a <details> element, so it needs no script.
+{%- endcomment -%}
+{%- assign name = site.izar.name | default: site.title -%}
+{%- assign name_first = name | split: ' ' | first -%}
+{%- assign name_rest = name | remove_first: name_first | strip -%}
+{%- capture links -%}
+  {%- for item in site.izar.nav -%}
+    {%- include url.html url=item.url -%}
+    {%- assign current = false -%}
+    {%- if page.url == item.url or item.also contains page.url -%}{%- assign current = true -%}{%- endif -%}
+    {%- comment -%} Pages inside a section (a project, a post) light up their parent link too. {%- endcomment -%}
+    {%- assign item_first = item.url | slice: 0 -%}{%- assign item_last = item.url | slice: -1 -%}
+    {%- if item.url.size > 1 and item_first == '/' and item_last == '/' and page.url != item.url -%}
+      {%- assign url_head = page.url | slice: 0, item.url.size -%}{%- if url_head == item.url -%}{%- assign current = true -%}{%- endif -%}
+    {%- endif -%}
+    <li><a class="nav-link" href="{{ href }}"{% if current %} aria-current="page"{% endif %}>{{ item.label }}</a></li>
+  {%- endfor -%}
+{%- endcapture -%}
+<header class="site-header">
+  <div class="wrap site-header__inner">
+    <a class="site-logo" href="{{ '/' | relative_url }}"><strong>{{ name_first }}</strong>{% if name_rest != '' %} {{ name_rest }}{% endif %}</a>
+    <nav class="site-nav" aria-label="{{ site.data.strings.nav | default: 'Main' }}"><ul role="list">{{ links }}</ul></nav>
+    <ul class="site-header__social" role="list">
+      {%- for p in site.izar.social %}{% if p.show_in_header %}
+      <li><a href="{{ p.url }}" rel="me noopener">{% include icon.html name=p.icon %}<span>{{ p.label }}</span></a></li>
+      {%- endif %}{% endfor %}
+    </ul>
+    {%- if site.izar.theme_switch %}
+    <button class="theme-switch" type="button" data-theme-switch aria-pressed="false" aria-label="{{ site.data.strings.dark_mode | default: 'Dark mode' }}">{% include icon.html name="moon" class="theme-switch__moon" %}{% include icon.html name="sun" class="theme-switch__sun" %}</button>
+    {%- endif %}
+    <details class="site-menu">
+      <summary class="site-menu__button" aria-label="{{ site.data.strings.menu | default: 'Menu' }}">{% include icon.html name="menu" class="site-menu__open" %}{% include icon.html name="close" class="site-menu__close" %}</summary>
+      <nav class="site-menu__panel" aria-label="{{ site.data.strings.nav | default: 'Main' }}"><ul role="list">{{ links }}</ul></nav>
+    </details>
+  </div>
+</header>

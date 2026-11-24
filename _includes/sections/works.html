@@ -1,0 +1,50 @@
+{%- comment -%}
+  Works: your latest projects as cards. It reads the projects in _projects/, not inline items.
+  Variants:
+    staggered  two columns on wide screens: the heading, first card and link on the left, the other cards on the right, offset. The design.
+    grid       heading on top, cards in a tidy grid below (three across on wide screens when you show more than four).
+  Fields: heading, note, limit (how many cards; default 3 for staggered, 4 for grid),
+          show (`all` lists every project by `order`; the default lists only the featured ones; no limit applies to `all` unless you set one),
+          items [project file names, e.g. lewis] (hand-pick and order the cards; leave out to show the featured projects by `order`),
+          link { label, url } (the "All projects" link), footnote (Markdown, small print under the link)
+  A project is one file in _projects/ with title, summary, tags, year, client, order, featured and image.
+{%- endcomment -%}
+{%- assign s = include.section -%}
+{%- assign wid = s.id | default: 'works' -%}{%- if include.prefix %}{% assign wid = include.prefix | append: '-' | append: wid %}{% endif -%}
+{%- assign v = s.variant | default: 'staggered' -%}
+{%- if v == 'grid' %}{% assign max = s.limit | default: 4 %}{% else %}{% assign max = s.limit | default: 3 %}{% endif -%}
+{%- assign list = '' | split: ',' -%}
+{%- if s.items.size > 0 -%}
+  {%- for name in s.items -%}{%- assign one = site.projects | where: 'slug', name -%}{%- assign list = list | concat: one -%}{%- endfor -%}
+{%- else -%}
+  {%- if s.show == 'all' -%}{%- assign list = site.projects | sort: 'order' -%}{%- assign max = s.limit | default: 100 -%}
+  {%- else -%}{%- assign list = site.projects | where: 'featured', true | sort: 'order' -%}{%- endif -%}
+{%- endif -%}
+{%- assign list = list | slice: 0, max -%}
+{%- capture head_id %}{{ wid }}-title{% endcapture -%}
+<section {% include section-attrs.html section=s default='staggered' prefix=include.prefix %} aria-labelledby="{{ head_id }}">
+  <div class="wrap works works--{{ v }}{% if list.size > 4 or s.show == 'all' %} works--many{% endif %}">
+    {%- comment -%} No visible heading (e.g. under the Works page header)? A hidden h2 keeps the outline h1 → h2 → h3 for screen readers. {%- endcomment -%}
+    {%- unless s.heading %}<h2 class="visually-hidden" id="{{ head_id }}">{{ s.hidden_heading | default: site.data.strings.projects | default: 'Projects' }}</h2>{% endunless %}
+    {%- if s.heading or s.note %}
+    <div class="works__head" data-reveal>{% include section-head.html section=s id=head_id %}</div>
+    {%- endif %}
+    {%- if v == 'grid' %}
+    {%- comment -%} On the Works page (show: all) the grid is on the first screen, so its first row (up to three cards) loads at once. {%- endcomment -%}
+    {%- for p in list %}{% assign eager = false %}{% if forloop.index <= 3 and s.show == 'all' %}{% assign eager = true %}{% endif %}{% include project-card.html project=p index=forloop.index0 eager=eager sizes="(min-width: 64em) 380px, (min-width: 36em) 46vw, 92vw" %}{% endfor %}
+    {%- else %}
+    {%- if list.size > 0 %}{% assign first_p = list[0] %}{% include project-card.html project=first_p index=0 sizes="(min-width: 60em) 520px, (min-width: 36em) 80vw, 92vw" %}{% endif %}
+    {%- if list.size > 1 %}
+    <div class="works__more">
+      {%- for p in list offset: 1 %}{% include project-card.html project=p index=forloop.index sizes="(min-width: 60em) 520px, (min-width: 36em) 80vw, 92vw" %}{% endfor %}
+    </div>
+    {%- endif %}
+    {%- endif %}
+    {%- if s.link or s.footnote %}
+    <div class="works__foot" data-reveal>
+      {%- if s.link %}{% include url.html url=s.link.url %}<a class="cmd cmd--plain" href="{{ href }}">{{ s.link.label }}</a>{% endif %}
+      {%- if s.footnote %}<div class="works__note">{{ s.footnote | markdownify }}</div>{% endif %}
+    </div>
+    {%- endif %}
+  </div>
+</section>

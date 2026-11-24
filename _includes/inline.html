@@ -1,0 +1,2 @@
+{%- comment -%} One line of Markdown (**bold**, *italic*, [link](/x)) without the wrapping <p>. {%- endcomment -%}
+{{- include.text | markdownify | remove: '<p>' | remove: '</p>' | strip -}}

@@ -1,0 +1,23 @@
+{%- comment -%}
+  Page header: the opening of an inner page (Works, Notes, Contact). The page's one h1.
+  Variants:
+    simple  badge (optional), heading, a short line under it. Quiet, so the content below leads.
+  Fields: badge, heading (defaults to the page title), text, stats [{ value, label }] (optional, like the hero)
+  Never fades in: it's the first thing on the page.
+{%- endcomment -%}
+{%- assign s = include.section -%}
+{%- assign hid = s.id | default: 'page-header' -%}{%- if include.prefix %}{% assign hid = include.prefix | append: '-' | append: hid %}{% endif -%}
+<section {% include section-attrs.html section=s default='simple' prefix=include.prefix %} aria-labelledby="{{ hid }}-title">
+  <div class="wrap page-head">
+    {%- if s.badge %}<p class="badge">{{ s.badge }}</p>{% endif %}
+    <h1 class="page-head__title" id="{{ hid }}-title">{{ s.heading | default: page.title | strip | escape | newline_to_br }}</h1>
+    {%- if s.text %}<div class="page-head__text">{{ s.text | markdownify }}</div>{% endif %}
+    {%- if s.stats.size > 0 %}
+    <dl class="hero__stats">
+      {%- for st in s.stats %}
+      <div class="stat"><dt class="stat__num">{{ st.value }}</dt><dd class="stat__label">{{ st.label }}</dd></div>
+      {%- endfor %}
+    </dl>
+    {%- endif %}
+  </div>
+</section>

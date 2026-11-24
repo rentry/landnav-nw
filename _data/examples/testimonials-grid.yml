@@ -1,0 +1,26 @@
+- type: testimonials
+  variant: grid
+  heading: Testimonials
+  note: What clients say about me
+  items:
+    - quote: Daniel was a real pleasure to work with and we look forward to working with him again. He's definitely the kind of designer you can trust with a project from start to finish.
+      name: Benjamin Bryant
+      role: VP & Co-Founder
+      company: Wiser
+      company_url: https://wiser.example
+      rating: 5
+      avatar: { src: /assets/img/people/benjamin-73.webp, width: 73, height: 73 }
+    - quote: He took a rough brief and turned it into a clear, fast site that our team can edit without calling anyone. Every deadline was met, and every question got a straight answer.
+      name: Rasid Hossain
+      role: Project Management
+      company: Pensalab
+      company_url: https://pensalab.example
+      rating: 5
+      avatar: { src: /assets/img/people/rasid-73.webp, width: 73, height: 73 }
+    - quote: Daniel cares about the small details most people skip. Our pages load in a blink now, and customers keep telling us how easy the new site is to use.
+      name: Logan Cee
+      role: UI/UX Designer
+      company: LoganCee
+      company_url: https://logancee.example
+      rating: 5
+      avatar: { src: /assets/img/people/logan-73.webp, width: 73, height: 73 }

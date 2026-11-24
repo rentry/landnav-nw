@@ -1,0 +1,93 @@
+{%- comment -%}
+  Contact: how to reach you, and a message form beside it.
+  Variants:
+    form  your email, address and profiles on the left; the form in a raised card on the right. Stacks on phones.
+  The form needs no JavaScript. Pick the service in _config.yml under izar.form:
+    provider: web3forms   with access_key (free key from web3forms.com)
+    provider: formspree   with endpoint (https://formspree.io/f/your-id)
+    provider: demo        sends nothing and goes straight to the thank-you page (for the demo site)
+  Email, address and profiles come from _config.yml (izar.email, izar.address, izar.social).
+  Fields: eyebrow, heading, intro, availability (a status line with a mint dot), budgets [] (adds a budget menu),
+          topics [] (adds a "What's it about?" menu), note (small text under the button)
+{%- endcomment -%}
+{%- assign s = include.section -%}
+{%- assign form = site.izar.form -%}
+{%- assign email = site.izar.email -%}
+{%- assign thanks = '/thank-you/' | absolute_url -%}
+{%- assign cid = s.id | default: 'contact' -%}{%- if include.prefix %}{% assign cid = include.prefix | append: '-' | append: cid %}{% endif -%}
+{%- assign ctitle = cid | append: '-title' -%}
+{%- assign live = false -%}{%- if form.provider == 'web3forms' or form.provider == 'formspree' -%}{%- assign live = true -%}{%- endif -%}
+<section {% include section-attrs.html section=s default='form' prefix=include.prefix %} aria-labelledby="{{ ctitle }}">
+  <div class="wrap contact__grid">
+    <div class="contact__side" data-reveal>
+      {%- comment -%} Written out here, not section-head.html, because that include shows `note` beside the heading and here `note` belongs under the button. {%- endcomment %}
+      <header class="sec-head">
+        {%- if s.eyebrow %}<p class="eyebrow">{{ s.eyebrow }}</p>{% endif %}
+        <div class="section-head"><h2 id="{{ ctitle }}">{% include inline.html text=s.heading %}</h2></div>
+        {%- if s.intro %}<div class="sec-head__intro lede">{{ s.intro | markdownify }}</div>{% endif %}
+      </header>
+      {%- if s.availability %}<p class="contact__status"><span class="contact__dot" aria-hidden="true"></span>{{ s.availability }}</p>{% endif %}
+      <ul class="contact__ways" role="list">
+        {%- if email %}
+        <li><a class="contact__email" href="mailto:{{ email }}">{% include icon.html name="mail" %}<span>{{ email }}</span></a></li>
+        {%- endif %}
+        {%- if site.izar.address %}
+        <li class="contact__address">{{ site.izar.address }}</li>
+        {%- endif %}
+        {%- for link in site.izar.social %}
+        <li><a class="contact__link" href="{{ link.url }}" rel="noopener me">{% include icon.html name=link.icon %}<span>{{ link.label }}</span></a></li>
+        {%- endfor %}
+      </ul>
+    </div>
+
+    {%- if form.provider == 'web3forms' %}{% assign action = 'https://api.web3forms.com/submit' %}
+    {%- elsif form.provider == 'formspree' %}{% assign action = form.endpoint %}
+    {%- else %}{% assign action = '/thank-you/' | relative_url %}{% endif %}
+    {%- comment -%} Demo mode: fields have no names, so nothing a visitor types is sent or put in the address bar. {%- endcomment %}
+    <form class="card contact__form" action="{{ action }}" method="{% if live %}post{% else %}get{% endif %}" data-reveal style="--i: 1">
+      {%- if form.provider == 'web3forms' %}
+      <input type="hidden" name="access_key" value="{{ form.access_key }}">
+      <input type="hidden" name="subject" value="{{ form.subject | default: site.data.strings.form_subject | default: 'New message from your website' }}">
+      <input type="hidden" name="redirect" value="{{ thanks }}">
+      <input type="checkbox" name="botcheck" class="visually-hidden" tabindex="-1" autocomplete="off" aria-hidden="true">
+      {%- elsif form.provider == 'formspree' %}
+      <input type="hidden" name="_subject" value="{{ form.subject | default: site.data.strings.form_subject | default: 'New message from your website' }}">
+      <input type="text" name="_gotcha" class="visually-hidden" tabindex="-1" autocomplete="off" aria-hidden="true">
+      {%- endif %}
+      <div class="field">
+        <label for="{{ cid }}-name">{{ site.data.strings.your_name | default: 'Your name' }}</label>
+        <input class="input" id="{{ cid }}-name" {% if live %}name="name" {% endif %}autocomplete="name" required>
+      </div>
+      <div class="field">
+        <label for="{{ cid }}-email">{{ site.data.strings.email | default: 'Email' }}</label>
+        <input class="input" id="{{ cid }}-email" type="email" {% if live %}name="email" {% endif %}autocomplete="email" required>
+      </div>
+      {%- if s.budgets.size > 0 %}
+      <div class="field">
+        <label for="{{ cid }}-budget">{{ site.data.strings.budget | default: 'Budget' }} <span class="subtle">{{ site.data.strings.optional | default: '(optional)' }}</span></label>
+        <select class="select" id="{{ cid }}-budget"{% if live %} name="budget"{% endif %}>
+          <option value="">{{ site.data.strings.choose_one | default: 'Choose one' }}</option>
+          {%- for b in s.budgets %}<option>{{ b }}</option>{% endfor %}
+        </select>
+      </div>
+      {%- endif %}
+      {%- if s.topics.size > 0 %}
+      <div class="field">
+        <label for="{{ cid }}-topic">{{ site.data.strings.topic | default: "What's it about?" }} <span class="subtle">{{ site.data.strings.optional | default: '(optional)' }}</span></label>
+        <select class="select" id="{{ cid }}-topic"{% if live %} name="topic"{% endif %}>
+          <option value="">{{ site.data.strings.choose_one | default: 'Choose one' }}</option>
+          {%- for t in s.topics %}<option>{{ t }}</option>{% endfor %}
+        </select>
+      </div>
+      {%- endif %}
+      <div class="field">
+        <label for="{{ cid }}-message">{{ site.data.strings.message | default: 'Message' }}</label>
+        <textarea class="textarea" id="{{ cid }}-message"{% if live %} name="message"{% endif %} rows="6" required></textarea>
+      </div>
+      <div class="contact__send">
+        <button class="btn btn--primary" type="submit">{{ site.data.strings.send_message | default: 'Send message' }}</button>
+        {%- if s.note %}<p class="contact__note">{{ s.note }}</p>{% endif %}
+      </div>
+    </form>
+  </div>
+</section>

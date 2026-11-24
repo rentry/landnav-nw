@@ -1,0 +1,41 @@
+{%- comment -%}
+  Hero: the opening screen.
+  Variants:
+    portrait  words on the left; your cut-out portrait on a soft disc on the right, with floating tech chips. The design.
+    text      words only, for when you have no cut-out photo. Stats sit under the action.
+  Fields: badge, heading (a line break where you press Enter in a | block), text, action { label, url },
+          stats [{ value, label }], image { src, widths, width, height, alt },
+          chips [{ image, alt, at, size }]  at: left | top | right (where it floats), size: s | m | l
+  The hero never fades in: its heading and portrait must paint at once for a fast page.
+{%- endcomment -%}
+{%- assign s = include.section -%}
+{%- assign hid = s.id | default: 'hero' -%}{%- if include.prefix %}{% assign hid = include.prefix | append: '-' | append: hid %}{% endif -%}
+<section {% include section-attrs.html section=s default='portrait' prefix=include.prefix %} aria-labelledby="{{ hid }}-title">
+  <div class="wrap hero__grid">
+    <div class="hero__body">
+      {%- if s.badge %}<p class="badge">{{ s.badge }}</p>{% endif %}
+      <h1 class="hero__title" id="{{ hid }}-title">{{ s.heading | strip | escape | newline_to_br }}</h1>
+      {%- if s.text %}<div class="hero__text">{{ s.text | markdownify }}</div>{% endif %}
+      {%- if s.action %}{% include url.html url=s.action.url %}<a class="cmd" href="{{ href }}">{{ s.action.label }}</a>{% endif %}
+      {%- if s.stats.size > 0 %}
+      <dl class="hero__stats">
+        {%- for st in s.stats %}
+        <div class="stat"><dt class="stat__num">{{ st.value }}</dt><dd class="stat__label">{{ st.label }}</dd></div>
+        {%- endfor %}
+      </dl>
+      {%- endif %}
+    </div>
+    {%- if s.image and s.variant != 'text' %}
+    <div class="hero__media">
+      <span class="hero__disc" aria-hidden="true"></span>
+      {% include image.html image=s.image eager=true class="hero__portrait" sizes="(min-width: 60em) 560px, (min-width: 36em) 30rem, 20rem" %}
+      {%- for c in s.chips %}
+      {%- include url.html url=c.image %}
+      <span class="chip hero__chip hero__chip--{{ c.at | default: 'left' }} hero__chip--{{ c.size | default: 'm' }}"><img src="{{ href }}" alt="{{ c.alt | escape }}" width="64" height="64" decoding="async"></span>
+      {%- endfor %}
+      <span class="hero__dot hero__dot--a" aria-hidden="true"></span>
+      <span class="hero__dot hero__dot--b" aria-hidden="true"></span>
+    </div>
+    {%- endif %}
+  </div>
+</section>

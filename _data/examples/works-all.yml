@@ -1,0 +1,7 @@
+- type: works
+  variant: grid
+  tone: default
+  heading: All Works
+  note: Every project, in order
+  show: all
+  footnote: '\* Some projects aren''t public because of NDAs. If you''d like to see more, [contact me](/contact/).'

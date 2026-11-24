@@ -1,0 +1,9 @@
+- type: notes
+  variant: list
+  tone: default
+  heading: Latest Notes
+  note: Short write-ups on building for the web
+  limit: 4
+  link:
+    label: All notes
+    url: /notes/

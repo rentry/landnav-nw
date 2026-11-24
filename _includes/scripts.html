@@ -1,0 +1,19 @@
+{%- comment -%}
+  Reveal on scroll: marks each [data-reveal] element .is-in once a little of it is on screen, then stops watching it.
+  No library; base.css does the fade. Old browsers without IntersectionObserver just show everything.
+{%- endcomment -%}
+{% if site.izar.reveal != false %}<script>
+(function(){var r=document.documentElement,els=document.querySelectorAll('[data-reveal]');
+if(!('IntersectionObserver' in window)){r.classList.remove('reveal');return}
+var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('is-in');io.unobserve(e.target)}})},{rootMargin:'0px 0px -8% 0px'});
+els.forEach(function(el){io.observe(el)});r.classList.add('reveal-ready')})();
+</script>{% endif %}
+{%- comment -%}
+  Light/dark switch: flips <html data-theme>, remembers the choice, and tells form controls and the browser bar which scheme is on.
+{%- endcomment -%}
+{% if site.izar.theme_switch %}<script>
+(function(){var r=document.documentElement,b=document.querySelector('[data-theme-switch]');if(!b)return;
+function cur(){return r.dataset.theme||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}
+function show(){var d=cur()=='dark';b.setAttribute('aria-pressed',d);var m=document.querySelector('meta[name=color-scheme]');if(m)m.content=cur()}
+b.addEventListener('click',function(){var n=cur()=='dark'?'light':'dark';r.dataset.theme=n;try{localStorage.setItem('izar-theme',n)}catch(e){}show()});show()})();
+</script>{% endif %}
