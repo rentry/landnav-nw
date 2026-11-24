@@ -21,6 +21,7 @@ footer_start_by: "Start by"       # used unless izar.footer.action.before is set
 footer_say_hi: "saying hi"        # used unless izar.footer.action.label is set
 footer_info: "Information"        # used unless izar.footer.info_label is set
 all_rights_reserved: "All rights reserved"   # printed after "© 2026"
+made_by_humans: "Proudly built by humans (not AI) using <a href='https://jekyllrb.com/'>open source code</a>"
 
 # --- Notes and posts ---------------------------------------------------------
 all_notes: "All notes"            # back link on a post, and the hidden heading of the notes list

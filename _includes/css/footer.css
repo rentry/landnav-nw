@@ -17,13 +17,13 @@
     margin-top: var(--space-2xl); padding-top: var(--space-m); border-top: 1px solid var(--line);
   }
   .site-footer__legal { font-size: var(--step--2); color: var(--ink-subtle); order: 3; flex-basis: 100%; }
-  .site-footer__social { list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: var(--space-3xs); margin-left: auto; }
-  .site-footer__social a { display: grid; place-items: center; width: var(--tap); height: var(--tap); color: var(--ink-subtle); transition: color var(--dur-fast); }
-  .site-footer__social a:hover { color: var(--brand-ink); }
+  .site-footer__credit { margin-left: auto; font-size: var(--step--2); color: var(--ink-subtle); }
+  .site-footer__credit a { color: inherit; text-underline-offset: 0.2em; }
+  .site-footer__credit a:hover { color: var(--brand-ink); }
 
   @media (min-width: 52em) {
     .site-footer__call { grid-template-columns: 1fr minmax(0, 33%); gap: var(--space-2xl); }
     .site-footer__legal { order: 0; flex-basis: auto; margin-right: auto; margin-left: var(--space-m); }
-    .site-footer__social { margin-left: 0; }
+    .site-footer__credit { margin-left: 0; }
   }
 }
