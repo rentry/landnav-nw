@@ -14,8 +14,12 @@
   .hero__media { position: relative; justify-self: center; width: min(100%, 20rem); margin-bottom: calc(var(--space-2xl) * -1); }
   @media (min-width: 36em) { .hero__media { width: min(100%, 30rem); } }
   .hero__disc {
-    position: absolute; inset: 6% -2% auto 8%; aspect-ratio: 1; border-radius: var(--radius-round);
-    background: linear-gradient(135deg, light-dark(var(--graphite-100), #1f2125), light-dark(var(--graphite-50), #2a2d31));
+    position: absolute; inset: 6% -2% auto 8%; aspect-ratio: 1; pointer-events: none;
+    background: var(--line-strong);
+    mask:
+      url("/assets/img/hero/topo.svg") center / cover no-repeat,
+      radial-gradient(closest-side, #000 35%, transparent 100%);
+    mask-composite: intersect;
   }
   .hero__portrait { position: relative; width: 100%; }
   .hero__chip { position: absolute; z-index: 1; }
