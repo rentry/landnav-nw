@@ -13,7 +13,7 @@ sections:
       with LandNav NW.
     text: I help individuals and groups rediscover the freedom and independence of self-reliant wilderness navigation.
     action:
-      label: Let's explore!
+      label: Let's explore
       url: /contact/
     stats:
       - value: "18"
