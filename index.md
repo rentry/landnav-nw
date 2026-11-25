@@ -2,8 +2,8 @@
 # Your home page. Each item under `sections:` is one section, in order.
 # Copy more from /blocks/, delete what you don't need, or add `hidden: true` to switch one off.
 layout: home
-title: Front-end developer
-description: Daniel Stephan, freelance front-end developer and designer. I design and code beautifully simple things.
+title: LandNav NW
+description: A land navigation school designed to empower people to rediscover the joy and freedom of self-reliant wayfinding.
 sections:
   - type: hero
     variant: portrait
@@ -11,7 +11,7 @@ sections:
     heading: |
       Find your way home
       with LandNav NW.
-    text: I help individuals and groups discover the freedom and independence of self-reliant wilderness navigation.
+    text: I help individuals and groups rediscover the freedom and independence of self-reliant wilderness navigation.
     action:
       label: Let's explore!
       url: /contact/
