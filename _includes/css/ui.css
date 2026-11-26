@@ -93,7 +93,8 @@
   .icon { width: 1.25em; height: 1.25em; flex: none; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
   .icon--brand { color: var(--brand-ink); }
   .icon--fill, .icon .f { fill: currentColor; stroke: none; }
-
+  .icon--mask { display: inline-block; background: currentColor; mask: var(--icon) center / contain no-repeat; }
+  
   /* Icon chip: a round raised disc holding an icon or logo (the floating tech icons in the hero). */
   .chip {
     display: grid; place-items: center; width: var(--chip-size, 4rem); aspect-ratio: 1;
