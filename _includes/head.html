@@ -6,7 +6,7 @@
 {%- endcomment %}
 <script>document.documentElement.classList.add('js'{% if site.izar.reveal != false %},'reveal'{% endif %}){% if site.izar.theme_switch %};try{var t=localStorage.getItem('izar-theme');if(t)document.documentElement.dataset.theme=t}catch(e){}{% endif %}</script>
 <link rel="preload" href="{{ '/assets/fonts/jetbrains-mono-latin-wght.woff2' | relative_url }}" as="font" type="font/woff2" crossorigin>
-<link rel="icon" href="{{ site.favicon | default: '/assets/favicon.svg' | relative_url }}" type="image/svg+xml">
+<link rel="icon" href="{{ site.favicon | default: '/assets/favicon.png' | relative_url }}" type="image/svg+xml">
 {% seo %}
 {% feed_meta %}
 {%- assign scheme = site.izar.color_scheme | default: 'dark' %}
