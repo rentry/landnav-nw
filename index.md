@@ -2,7 +2,7 @@
 # Your home page. Each item under `sections:` is one section, in order.
 # Copy more from /blocks/, delete what you don't need, or add `hidden: true` to switch one off.
 layout: home
-title: LandNav NW
+title: LANDNAV NW
 description: A land navigation school designed to empower people to rediscover the joy and freedom of self-reliant wayfinding.
 sections:
   - type: hero
@@ -10,7 +10,7 @@ sections:
     badge: Land Navigation Instructor
     heading: |
       Find your way home
-      with LandNav NW.
+      with LANDNAV NW.
     text: I help individuals and groups rediscover the freedom and independence of self-reliant wilderness navigation.
     action:
       label: Let's explore
@@ -27,16 +27,13 @@ sections:
       height: 764
       alt: Daniel in a grey hoodie, hood up
     chips:
-      - image: /assets/img/hero/logo-angular.webp
-        alt: Angular
+      - image: /assets/img/hero/map.svg
         at: left
         size: m
-      - image: /assets/img/hero/logo-python.webp
-        alt: Python
+      - image: /assets/img/hero/gps.svg
         at: top
         size: s
-      - image: /assets/img/hero/logo-node.webp
-        alt: Node.js
+      - image: /assets/img/hero/compass.svg
         at: right
         size: l
   - type: services
